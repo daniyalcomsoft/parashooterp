@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-&-6%oq9o-#4p*0hltt#dp4-y_l35n+2_8@pel1xpgc8itv_5q5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aghaa-enterprise-mobile-phone.com', 'www.aghaa-enterprise-mobile-phone.com']
 
 # DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 # DATE_FORMAT = ("%d-%m-%Y"),
@@ -96,10 +96,10 @@ WSGI_APPLICATION = 'parashooterp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ddv10qmaa2brh0',
-        'USER': 'vwkowkkibkveup',
-        'PASSWORD': '7c2a15fef32141f7e4dd4f9c30d5dc37ca007fa5966cd5d951d97b734505cf2a',
-        'HOST': 'ec2-3-234-126-10.compute-1.amazonaws.com',
+        'NAME': 'dajt9lbb5u842j',
+        'USER': 'tssurvsgwdoejq',
+        'PASSWORD': '45a8f94733e86583240f1f972dd0fc5504fe16ed754079531cfdc867aba77bfe',
+        'HOST': 'ec2-34-238-201-192.compute-1.amazonaws.com',
         'PORT':'5432'
     }
 }

@@ -7,8 +7,6 @@ import re
 from tabnanny import check
 from django.shortcuts import render, redirect, HttpResponse
 from parashooterp import settings
-# from NetkErp.settings import DATE_INPUT_FORMATS, DATE_FORMAT
-# from NetkErp.NtekApp.forms import EndClientForm 
 from parashootapp.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
