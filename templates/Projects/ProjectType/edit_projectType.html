@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_projectType' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Project Type</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Project Type</label>
+                                <input type="text" class="form-control" name="projectType_id" value="{{typep.PTID}}" required hidden>
+                                <input type="text" class="form-control" name="Project_type" value="{{typep.ProjectType}}" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Project Type</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

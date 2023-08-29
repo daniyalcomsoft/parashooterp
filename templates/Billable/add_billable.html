@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_billable' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Billable</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Billable</label>
+                                <input type="text" class="form-control" name="billable" required>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Billable</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Customers</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Customers</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="{% url 'add_customer' %}" class="btn btn-primary"
+          ><i class="fas fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id='table_id' class="table table-bordered table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <!-- <th>ID</th> -->
+                  <th>Customers Name</th>
+                  <th>Contact Person</th>
+                  <th>Designation</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone No</th>
+                  <th>Customer Category</th>
+                  <th>WhatsApp Number</th>
+                  <th>City</th>
+                  <th>Area</th>
+                  <th>Customer Type</th>
+                  <th>Address</th>
+                  <th>Agents</th>
+                  <th>Opening Balance</th>
+                  <th>Credit Limit</th>
+
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cus in cust %}
+                <tr>
+                  <!-- <td>{{con.CountryID}}</td> -->
+                  <td><a href="">{{cus.CustomerName}}</a></td>
+                  <td><a href="">{{cus.ContactPerson}}</a></td>
+                  <td><a href="">{{cus.Designation}}</a></td>
+                  <td><a href="">{{cus.Name}}</a></td>
+                  <td><a href="">{{cus.Email}}</a></td>
+                  <td><a href="">{{cus.PhoneNo}}</a></td>
+                  <td><a href="">{{cus.CustomerCategory.Name}}</a></td>
+                  <td><a href="">{{cus.WhatsAppNo}}</a></td>
+                  <td><a href="">{{cus.Province.ProvinceName}}</a></td>
+                  <td><a href="">{{cus.City.CityName}}</a></td>
+                  <td><a href="">{{cus.Area.AreaName}}</a></td>
+                  <td><a href="">{{cus.CustomerType.Name}}</a></td>
+                  <td><a href="">{{cus.Address}}</a></td>
+                  <td><a href="">{{cus.Agents}}</a></td>
+                  <td><a href="">{{cus.OpeningBalance}}</a></td>
+                  <td><a href="">{{cus.CreditLimit}}</a></td>
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_customer' cus.CustomerID %}"class="btn btn-sm bg-success-light mr-2">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="{% url 'delete_customer' cus.CustomerID %}" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+<!-- {% url 'edit_company' com.ClientID %} -->

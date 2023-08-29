@@ -1,0 +1,155 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post" action="{% url 'add_ticket' %}">
+            {% csrf_token %}
+            <div class="row" style="margin: 15px">
+                {% include 'includes/messages.html' %}
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Ticket No</label>
+                        <input type="text" class="form-control" name="ticketno" value="{{ticket.TID}}" required readonly />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label for="">Contract</label>
+                        <select class="form-control" name="contract_id" required>
+                            <option>Select Contract</option>
+                            {% for ct in contract %}
+                            <option value="{{ct.ContractID}}"{% if ct.ContractID == ticket.Contract.ContractID %} selected {% endif %}>{{ct.ContractName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label for="">Project </label>
+                        <select class="form-control" name="project_id" required>
+                            <option>Select Project</option>
+                            {% for p in project %}
+                            <option value="{{p.ProjectID}}"{% if p.ProjectID == ticket.Project.ProjectID %}selected{% endif %}>{{p.ProjectName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label for="">Ticket Type</label>
+                        <select class="form-control" name="tickettype_id" required>
+                            <option>Select Ticket Type</option>
+                            {% for tt in tickettype %}
+                            <option value="{{tt.TTID}}">{{tt.TicketType}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-2">
+                    <div class="form-group">
+                        <label for="">Billable</label>
+                        <select class="form-control" name="billable_id" required
+                            style="width: auto !important">
+                            <option>Select Billable</option>
+                            {% for ba in billable %}
+                            <option value="{{ba.BAID}}">{{ba.Billable}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-1"></div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Parent Ticket No</label>
+                        <select class="form-control" name="parentticket_id">
+                            <option>Select Parent Ticket #</option>
+                            {% for t in pticketno %}
+                            <option value="{{t.TID}}">{{t.TID}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Ticket Schedule Date</label>
+                        <input type="text" name="ticektsch_date" class="form-control"
+                            placeholder="dd-mm-yyy" id="timePicker6" name="id_birth_date" />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Ticket Complete Date</label>
+                        <input type="text" class="form-control" name="ticketcom_date"
+                            placeholder="dd-mm-yyy" id="timePicker7" name="id_birth_date" />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12">
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <textarea type="text" class="form-control" name="subject" required></textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label for="">Client</label>
+                        <select class="form-control" name="client_id" required>
+                            <option>Select Client</option>
+                            {% for c in client %}
+                            <option value="{{c.ClientID}}">{{c.CompanyName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label for="">End Client</label>
+                        <select class="form-control" name="endclient_id" required>
+                            <option>Select End-Client</option>
+                            {%for en in endclient %}
+                            <option value="{{en.EndClientID}}">
+                                {{en.CompanyName}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Reference No</label>
+                        <input type="text" class="form-control" name="reference_no" required />
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>Country</label>
+                        <select class="form-control" name="country_id" required>
+                            <option>Select Country</option>
+                            {% for cn in country %}
+                            <option value="{{cn.CountryID}}">
+                                {{cn.CountryName}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label>City</label>
+                        <select class="form-control" name="city_id" required>
+                            <option>Select City</option>
+                            {% for ct in city %}
+                            <option value="{{ct.CityID}}">{{ct.CityName}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

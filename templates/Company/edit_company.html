@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" id="addd" action="{% url 'update_company' %}" data-city-url="{% url 'ajax_load_city' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Client</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" class="form-control" name="CompanyName" required value="{{company.CompanyName}}">
+                                <input type="text" class="form-control" name="client_id" required value="{{company.ClientID}}" hidden>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                <input type="text" class="form-control" name="Address1" required value="{{company.Address1}}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Address2</label>
+                                <input type="text" class="form-control" name="Address2" value="{{company.Address2}}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Country</label>
+                                <select class="form-control" id="countryddl" name="country_id" required>
+                                    <option>Select Country</option>
+                                    {% for con in country %}
+                                    <option value="{{con.CountryID}}"{% if con.CountryID == company.Country.CountryID %}selected{% endif %}>{{con.CountryName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">City</label>
+                                <select class="form-control" id="carddl" name="city_id" required>
+                                    <option>Select City</option>
+                                    {% for cit in city %}
+                                    <option value="{{cit.CityID}}"{%if cit.CityID == company.City.CityID %}selected{% endif %}>{{cit.CityName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Client</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

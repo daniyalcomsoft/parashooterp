@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_contractSLA' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Contract SLA</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Contract SLA</label>
+                                <input type="text" class="form-control" name="contractSLA_name" value="{{sla.ContractSLA}}" required >
+                                <input type="text" class="form-control" name="contractSLA_id" value="{{sla.SLAID}}" required hidden>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Contract SLA</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

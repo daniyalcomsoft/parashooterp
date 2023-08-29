@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_ticketType' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Ticket Type</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Ticket Type</label>
+                                <input type="text" class="form-control" name="tickettype_id" value="{{tickettype.TTID}}" hidden required>
+                                <input type="text" class="form-control" name="tickettype" value="{{tickettype.TicketType}}" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Ticket Type</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

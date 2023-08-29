@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Work Activity</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Work Activity</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="{% url 'add_workActivity' %}" class="btn btn-primary"
+          ><i class="fas fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive table-bordered">
+            <table id="table_id" class="table table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <th>Ticket No</th>
+                  <th>Field Engineer</th>
+                  <th>Remote / Client</th>
+                  <th>Date / Time</th>
+                  <th>Work Detail</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for wa in workact %}
+                <tr>
+                  <td>{{wa.Ticket.TID}}</td>
+                  <td>{{wa.FEngg}}</td>
+                  <td>{{wa.RemoteClient}}</td>
+                  <td>{{wa.ActivityDate|date:'d:m:Y H:i'}}</td>
+                  <td>{{wa.Description}}</td>
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_workActivity' wa.WAID %}" class="btn btn-sm bg-success-light mr-2" id="text">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="{% url 'delete_workActivity' wa.WAID %}" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

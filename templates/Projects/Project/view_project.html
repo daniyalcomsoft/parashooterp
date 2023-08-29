@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Project</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Project</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="{% url 'add_project' %}" class="btn btn-primary"
+          ><i class="fas fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="table_id" class="table table-bordered table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Client RefNo</th>
+                  <!-- <th>Description</th> -->
+                  <th>Client</th>
+                  <th>End-Client</th>
+                  <th>Start-Date</th>
+                  <th>End-Date</th>
+                  <th>Project Type</th>
+                  <th>Project Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for pro in project %}
+                <tr>
+                  <td>{{pro.ProjectName}}</td>
+                  <td>{{pro.ClientRefNo}}</td>
+                  <!-- <td>{{pro.Description}}</td> -->
+                  <td>{{pro.Client}}</td>
+                  <td>{{pro.EndClient}}</td>
+                  <td>{{pro.StartDate|date:'d-m-Y'}}</td>
+                  <td>{{pro.EndDate|date:'d-m-Y'}}</td>
+                  <td>{{pro.ProjectType}}</td>
+                  <td>{{pro.ProjectStauts}}</td>
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_project' pro.ProjectID %}"class="btn btn-sm bg-success-light mr-2">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="{% url 'delete_project' pro.ProjectID %}" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

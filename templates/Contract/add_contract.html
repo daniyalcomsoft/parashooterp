@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" class="endclient" action="{% url 'add_contract' %}" data-endclient-url="{% url 'ajax_load_endclient' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Contract</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                            <label>Contract No</label>
+                            <input type="text" class="form-control" name="contractno" required>
+                        </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Contract Name</label>
+                                <input type="text" class="form-control" name="contractname" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Client Ref No</label>
+                                <input type="text" class="form-control" name="clientrn" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea type="text" class="form-control" name="description" required aria-multiline="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Client</label>
+                                <select class="form-control" id="clientddl" name="client_id" required>
+                                    <option>Select Client</option>
+                                    {% for ct in client %}
+                                    <option value="{{ct.ClientID}}">{{ct.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">End-Client</label>
+                                <select class="form-control" id="endclientddl" name="endclient_id" required>
+                                    <option>Select End-Client</option>
+                                    {% for ec in endclient %}
+                                    <option value="{{ec.EndClientID}}">{{ec.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="text" class="form-control" placeholder="dd-mm-yy" id="timePicker9" name="startdate" required >
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" class="form-control" placeholder="dd-mm-yy" id="timePicker10" name="enddate" required >
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Type</label>
+                                <select class="form-control" name="contractType_id" required>
+                                    <option>Select Contract Type</option>
+                                    {% for ct in contype %}
+                                    <option value="{{ct.CTID}}">{{ct.ContractType}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                           </div>
+                        <!-- <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Sub Type</label>
+                                <select class="form-control" name="contsubtype_id" required>
+                                    <option>Select Contract Sub Type</option>
+                                    {% for ct in contsubype %}
+                                    <option value="{{ct.CSTID}}">{{ct.ContractSubType}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div> -->
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract SLA</label>
+                                <select class="form-control" name="contractSLA_id" required>
+                                    <option>Select Contract SLA</option>
+                                    {% for ct in contSLA %}
+                                    <option value="{{ct.SLAID}}">{{ct.ContractSLA}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Status</label>
+                                <select class="form-control" name="contractStatus_id" required>
+                                    <option>Select Contract Status</option>
+                                    {% for cs in CStatus %}
+                                    <option value="{{cs.CSID}}">{{cs.ContractStatus}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Contract</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

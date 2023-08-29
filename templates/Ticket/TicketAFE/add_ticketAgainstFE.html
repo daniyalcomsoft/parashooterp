@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card" style="margin-bottom: 0px !important;">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_ticketAgaisntFE' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Ticket Against Field Engineer</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Ticket No</label>
+                                <select class="form-control" name="ticket_id" required>
+                                    <option>Select Ticket No</option>
+                                    {% for tic in ticket %}
+                                    <option value="{{tic.TID}}">{{tic.TID}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Field Engineer</label>
+                                <select class="form-control" name="fieldengg_id" required>
+                                    <option>Select Field Engineer</option>
+                                    {% for fe in fieldengg %}
+                                    <option value="{{fe.FEID}}">{{fe.FirstName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" name="email" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Mobile</label>
+                                <input type="text" class="form-control" name="mobile" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4" hidden>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="description" hidden>
+                            </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">+ Ticket Against Field Engineer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

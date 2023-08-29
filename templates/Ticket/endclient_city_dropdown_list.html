@@ -1,0 +1,7 @@
+<option disabled selected="true" value="">--Select--</option>
+{% for ec in endclient %}
+<option value="{{ec.EndClientID}}">{{ec.CompanyName}}</option>
+{% endfor %}
+{% for cit in city %}
+<option value="{{cit.CityID}}">{{cit.CityName}}</option>
+{% endfor %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Field Engineer</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Field Engineer</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="{% url 'add_engg' %}" class="btn btn-primary"
+          ><i class="fas fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered table-center mb-0 datatable">
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for engg in engineer %}
+                <tr>
+                  <td>{{engg.EmployeeID}}</td>
+                  <td><a href="">{{engg.FirstName}}</a></td>
+                  <td>{{engg.LastName}}</td>
+                  <td>{{engg.Country}} </td>
+                  <td>{{engg.City}}</td>
+                  <td>{{engg.Email}}</td>
+                  <td>{{engg.Mobile}}</td>
+
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_engg' engg.FEID %}"class="btn btn-sm bg-success-light mr-2">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="{% url 'delete_engg' engg.FEID %}" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+<!-- {% url 'edit_company' com.ClientID %} -->

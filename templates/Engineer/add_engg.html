@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" id="addd" action="{% url 'add_engg' %}" data-city-url="{% url 'ajax_load_city' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Engineer</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Employee ID</label>
+                            <input type="text" class="form-control" name="EmpID" required>
+                        </div>
+                       </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" name="FirstName" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="LastName" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Country</label>
+                                <select class="form-control" id="countryddl" name="country_id" required>
+                                    <option>Select Country</option>
+                                    {% for con in country %}
+                                    <option value="{{con.CountryID}}">{{con.CountryName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">City</label>
+                                <select class="form-control" id="carddl" name="city_id" required>
+                                    <option>Select City</option>
+                                    {% for cit in city %}
+                                    <option value="{{cit.CityID}}">{{cit.CityName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="Email" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="phone" class="form-control" name="Mobile" required>
+                            </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Engineer</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

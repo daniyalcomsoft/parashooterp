@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_contractSubType' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Contract Sub Type</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Contract Type</label>
+                            <select class="form-control" name="contractType_id" required>
+                                <option>Select Contract Type</option>
+                                {% for ct in contracttype %}
+                                <option value="{{ct.CTID}}">{{ct.ContractType}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Contract Sub Type</label>
+                                <input type="text" class="form-control" name="cont_subtype_id" value="{{contractsubtype.CSTID}}" hidden>
+                                <input type="text" class="form-control" name="cont_subtype" required value="{{contractsubtype.ContractSubType}}">
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Contract Sub Type</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

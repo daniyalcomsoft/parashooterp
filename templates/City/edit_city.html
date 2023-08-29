@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_city' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit City</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Country</label>
+                            <select class="form-control" name="country_id" id="select" required>
+                                <option>Select Country</option>
+                                {% for prov in province %}
+                                <option value="{{prov.ProvinceID}}"{%if prov.ProvinceID == city.Province.ProvinceID %} selected {% endif %}>{{prov.ProvinceName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>City Name</label>
+                                <input type="text" class="form-control" name="city_name" value="{{city.CityName}}" required>
+                                <input type="text" class="form-control" name="city_id" value="{{city.CityID}}" required hidden>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update City</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

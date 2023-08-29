@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Ticket Expenses</span></h5>
+                        </div>
+                        {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Ticket No</label>
+                                <select class="form-control" name="gender" required>
+                                    <option>Select Ticket No</option>
+                                    <option value="male">Ticket 123</option>
+                                    <option value="female">Ticket 124</option>
+                                    <option value="others">Ticket 2345</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Field Engineer</label>
+                                <select class="form-control" name="gender" required>
+                                    <option>Select Field Engineer</option>
+                                    <option value="male">Asim </option>
+                                    <option value="female">Adam Sultan</option>
+                                    <option value="others">Fakhhar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Expense Date</label>
+                                <input type="date" class="form-control" name="expensedate" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Currency</label>
+                                <input type="text" class="form-control" name="currency" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" class="form-control" name="amount" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Expense Reason</label>
+                                <input type="text" class="form-control" name="exoensereason" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Ticket Expense</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

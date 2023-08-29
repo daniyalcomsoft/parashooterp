@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Ticket Action History</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Ticket No</label>
+                                <select class="form-control" name="gender" required>
+                                    <option>Select Ticket No</option>
+                                    <option value="male">Ticket 2334</option>
+                                    <option value="female">Ticket 231</option>
+                                    <option value="others">Ticket 123</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="">Field Engineer</label>
+                                <select class="form-control" name="gender" required>
+                                    <option>Select Field Engineer</option>
+                                    <option value="male">Aleem Dar</option>
+                                    <option value="female">Kamran</option>
+                                    <option value="others">Wasi Shah</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Action Time</label>
+                                <input type="text" class="form-control" name="actiontime" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Action</label>
+                                <input type="text" class="form-control" name="action" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Ticket Action History</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

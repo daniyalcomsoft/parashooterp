@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_ticketAdminStatus' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Admin Status</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       
+                       <div class="col-12">
+                        <input type="text" class="form-control" name="ticketas_id" value="{{tastatus.TASID}}" hidden>
+                       </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Ticket No</label>
+                                <select class="form-control" name="ticket_id" required>
+                                    <option>Select Ticket No</option>
+                                    {% for tic in ticket %}
+                                    <option value="{{tic.TID}}"{% if tic.TID == tastatus.Ticket.TID %}selected{% endif %}>{{tic.TID}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Ticket Status</label>
+                                <select class="form-control" id="carddl" name="ticketstatus_id" required>
+                                    <option>Select Ticket Status</option>
+                                    {% for ts in ticketstatus %}
+                                    <option value="{{ts.TSID}}"{% if ts.TSID == tastatus.TicketStatus.TSID %}selected{% endif %}>{{ts.TicketStatus}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="text" class="form-control" name="status_date" id="status_date" value="{{tastatus.StatusDate|date:'d:m:Y H:i'}}" required> 
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="description" hidden>
+                            </div>
+                        </div>
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">+ Admin Status</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

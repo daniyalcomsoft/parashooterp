@@ -1,0 +1,74 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Client</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Client</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">\
+        <a href="{% url 'add_company' %}" class="btn btn-primary"
+          ><i class="fas fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered table-center mb-0 datatable">
+              <thead>
+                <tr>
+                  <!-- <th>ID</th> -->
+                  <th>Company Name</th>
+                  <th>Address 1</th>
+                  <th>Address 2</th>
+                  <th>City</th>
+                  <th>Country</th>
+
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for com in company %}
+                <tr>
+                  <!-- <td>{{com.ClientID}}</td> -->
+                  <td><a href="">{{com.CompanyName}}</a></td>
+                  <td>{{com.Address1}}</td>
+                  <td>{{com.Address2}}</td>
+                  <td>{{com.City}} </td>
+                  <td>{{com.Country}}</td>
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_company' com.ClientID %}"class="btn btn-sm bg-success-light mr-2">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="{% url 'delete_company' com.ClientID %}" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+<!-- {% url 'edit_company' com.ClientID %} -->

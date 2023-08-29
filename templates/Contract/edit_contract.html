@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" id="endclient" action="{% url 'update_contract' %}" data-endclient-url="{% url 'ajax_load_endclient' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Contract</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-4">
+                        <div class="form-group">
+                            <label>Contract No</label>
+                            <input type="text" class="form-control" name="contract_no" value="{{contract.ContractNo}}" required>
+                        </div>
+                       </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Client Ref No</label>
+                                <input type="text" class="form-control" name="client_rn" value="{{contract.ClientRefNo}}" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Contract Name</label>
+                                <input type="text" class="form-control" name="contract_id" value="{{contract.ContractID}}" required hidden>
+                                <input type="text" class="form-control" name="contract_name" value="{{contract.ContractName}}" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea type="text" class="form-control" name="description" value="" required aria-multiline="true">{{contract.Description}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Client</label>
+                                <select class="form-control" id="clientddl" name="client_id" required>
+                                    <option>Select Client</option>
+                                    {% for ct in client %}
+                                    <option value="{{ct.ClientID}}"{% if ct.ClientID == contract.Client.ClientID %}selected{% endif %}>{{ct.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">End-Client</label>
+                                <select class="form-control" id="endclientddl" name="endclient_id" required>
+                                    <option>Select End-Client</option>
+                                    {% for ec in endclient %}
+                                    <option value="{{ec.EndClientID}}"{% if ec.EndClientID == contract.EndClient.EndClientID %}selected{% endif %}>{{ec.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="text" placeholder="dd-mm-yy" id="timePicker9" class="form-control" name="startdate" value="{{contract.StartDate|date:'d:m:Y'}}" required >
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" placeholder="dd-mm-yy" id="timePicker10" class="form-control" name="enddate" value="{{contract.EndDate|date:'d:m:Y'}}" required >
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Type</label>
+                                <select class="form-control" name="contractType_id" required>
+                                    <option>Select Contract Type</option>
+                                    {% for ct in ctype %}
+                                    <option value="{{ct.CTID}}"{% if ct.CTID == contract.ContractType.CTID %}selected{% endif %}>{{ct.ContractType}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                           </div>
+                        <!-- <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Sub Type</label>
+                                <select class="form-control" name="contsubtype_id" required>
+                                    <option>Select Contract Sub Type</option>
+                                    {% for cst in cstype %}
+                                    <option value="{{cst.CSTID}}">{{cst.ContractSubType}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div> -->
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract SLA</label>
+                                <select class="form-control" name="contractSLA_id" required>
+                                    <option>Select Contract SLA</option>
+                                    {% for cla in csla %}
+                                    <option value="{{cla.SLAID}}"{%if cla.SLAID == contract.ContractSLA.SLAID %}selected{% endif %}>{{cla.ContractSLA}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Contract Status</label>
+                                <select class="form-control" name="contractStatus_id" required>
+                                    <option>Select Contract Status</option>
+                                    {% for cs in CStatus %}
+                                    <option value="{{cs.CSID}}"{% if cs.CSID == contract.CStatus.CSID %}selected{% endif %}>{{cs.ContractStatus}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Contract</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

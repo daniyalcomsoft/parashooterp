@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_city' %}" >
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add City</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Province</label>
+                            <select class="form-control" name="ProvinceID" required>
+                                <option>Select Province</option>
+                                {% for prov in province %}
+                                <option value="{{prov.ProvinceID}}">{{prov.ProvinceName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>City Name</label>
+                                <input type="text" class="form-control" name="city_name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add City</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

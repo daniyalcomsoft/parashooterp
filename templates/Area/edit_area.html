@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_area' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Area</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">City</label>
+                            <select class="form-control" name="city_id" id="select" required>
+                                <option>Select Country</option>
+                                {% for cit in city %}
+                                <option value="{{cit.CityID}}"{%if cit.CityID == area.City.CityID %} selected {% endif %}>{{cit.CityName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Area Name</label>
+                                <input type="text" class="form-control" name="AreaName" value="{{area.AreaName}}" required>
+                                <input type="text" class="form-control" name="AreaID" value="{{area.AreaID}}" required hidden>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Area</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

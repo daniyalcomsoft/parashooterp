@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Ticket</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Ticket</li>
+        </ul>
+      </div>
+      <div class="col-auto text-right float-right ml-auto">
+        <a href="{% url 'add_ticket' %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+  {% include 'includes/messages.html' %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="table_id" class="table table-bordered table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <th>Ticket No</th>
+                  <th>Contract</th>
+                  <th>Project</th>
+                  <th>Ticket Type</th>
+                  <th>Billable</th>
+                  <th>Parent Ticket No</th>
+                  <th>Schedule Date</th>
+                  <th>Complete Date</th>
+                  <th>Client</th>
+                  <th>End Client</th>
+                  <th>Reference No</th>
+                  <th>Country</th>
+                  <th>City</th>
+
+                  <!-- <th>Open Ticket</th>
+                  <th>Open Ticket Time</th>
+                  <th>Scheduled Ticket</th>
+                  <th>Scheduled Ticket Time</th>
+                  <th>Closed Ticket</th>
+                  <th>Closed Ticket Time</th>
+                  <th>On Hold Ticket</th>
+                  <th>On Hold Ticket Time</th>
+                  <th>Cancelled Ticket</th>
+                  <th>Cancelled Ticket Time</th> -->
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tick in ticket %}
+                <tr>
+                  <td>{{tick.TID}}</td>
+                  <td>{{tick.Contract}}</td>
+                  <td>{{tick.Project}}</td>
+                  <td>{{tick.TicketType}}</td>
+                  <td>{{tick.Billable}}</td>
+                  <td>{{tick.TID}}</td>
+                  <td>{{tick.TicketScheduleDate|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.TicketCompletedDate|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.Client}}</td>
+                  <td>{{tick.EndClient}}</td>
+                  <td>{{tick.ReferenceNo}}</td>
+                  <td>{{tick.Country}}</td>
+                  <td>{{tick.City}}</td>
+
+                  <!-- <td>{{tick.TicketOpen}}</td>
+                  <td>{{tick.OpenTime|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.TicketSchedule}}</td>
+                  <td>{{tick.ScheduleTime|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.TicketClosed}}</td>
+                  <td>{{tick.ClosedTime|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.TicketOnHold}}</td>
+                  <td>{{tick.OnHoldTime|date:'d-m-Y, H:i'}}</td>
+                  <td>{{tick.TicketCanceled}}</td>
+                  <td>{{tick.CancelledTime|date:'d-m-Y, H:i'}}</td> -->
+                  <td class="text-right">
+                    <div class="actions">
+                      <a href="{% url 'edit_ticket' tick.TID %}"class="btn btn-sm bg-success-light mr-2">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a href="" class="btn btn-sm bg-danger-light">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

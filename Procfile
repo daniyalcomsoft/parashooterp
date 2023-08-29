@@ -1,0 +1,1 @@
+web gunicorn NetkErp.wsgi:application --log-file -

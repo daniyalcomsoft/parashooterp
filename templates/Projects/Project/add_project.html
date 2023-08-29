@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" id="endclient" action="{% url 'add_project' %}" data-endclient-url="{% url 'ajax_load_endclient' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Project</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Project Name</label>
+                                <input type="text" class="form-control" name="project_name" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Client Ref No</label>
+                                <input type="text" class="form-control" name="client_rn" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea type="text" class="form-control" name="description" required aria-multiline="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Client</label>
+                                <select class="form-control" id="clientddl" name="client_id" required>
+                                    <option>Select Client</option>
+                                    {% for ct in client %}
+                                    <option value="{{ct.ClientID}}">{{ct.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">End-Client</label>
+                                <select class="form-control" id="endclientddl" name="endclient_id" required>
+                                    <option>Select End-Client</option>
+                                    {% for ec in endclient %}
+                                    <option value="{{ec.EndClientID}}">{{ec.CompanyName}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="text" id="timePicker17" class="form-control" name="startdate" required placeholder="dd-mm-yyyy">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" id="timePicker18" class="form-control" name="enddate" required placeholder="dd-mm-yyyy">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Project Type</label>
+                                <select class="form-control" name="projectType_id" required>
+                                    <option>Select Project Type</option>
+                                    {% for pt in ptype %}
+                                    <option value="{{pt.PTID}}">{{pt.ProjectType}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label for="">Project Status</label>
+                                <select class="form-control" name="projectStatus_id" required>
+                                    <option>Select Project Status</option>
+                                    {% for pt in pstatus %}
+                                    <option value="{{pt.PSID}}">{{pt.ProjectStatus}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Project</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
