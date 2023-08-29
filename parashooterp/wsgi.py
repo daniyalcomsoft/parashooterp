@@ -1,5 +1,5 @@
 """
-WSGI config for NetkErp project.
+WSGI config for parashooterp project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

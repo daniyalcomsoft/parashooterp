@@ -1,1 +1,1 @@
-web gunicorn NetkErp.wsgi:application --log-file -
+web gunicorn parashooterp.wsgi:application --log-file -
