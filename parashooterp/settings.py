@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-&-6%oq9o-#4p*0hltt#dp4-y_l35n+2_8@pel1xpgc8itv_5q5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aghaa-enterprise-mobile-phone.com', 'www.aghaa-enterprise-mobile-phone.com']
+ALLOWED_HOSTS = []
 
 # DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 # DATE_FORMAT = ("%d-%m-%Y"),
