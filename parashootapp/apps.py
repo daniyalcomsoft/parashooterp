@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NtekappConfig(AppConfig):
+class parashootappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'NtekApp'
+    name = 'parashootapp'

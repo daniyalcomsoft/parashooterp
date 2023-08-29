@@ -6,15 +6,15 @@ from queue import Empty
 import re
 from tabnanny import check
 from django.shortcuts import render, redirect, HttpResponse
-from NetkErp import settings
+from parashooterp import settings
 # from NetkErp.settings import DATE_INPUT_FORMATS, DATE_FORMAT
 # from NetkErp.NtekApp.forms import EndClientForm 
-from NtekApp.EmailBackEnd import EmailBackEnd
+from parashootapp.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from NtekApp.models import *
-from NtekApp.forms import *
+from parashootapp.models import *
+from parashootapp.forms import *
 from datetime import datetime
 
 
