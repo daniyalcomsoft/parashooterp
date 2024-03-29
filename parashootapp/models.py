@@ -10,6 +10,9 @@ from secrets import choice
 from unittest.util import _MAX_LENGTH
 from django.contrib.auth.models import AbstractUser
 
+# from barcode import BarcodeField
+
+
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -383,6 +386,151 @@ class Options(models.Model):
 
     def __str__(self):
         return self.OptionName
+
+class CategoryOne(models.Model):
+    CategoryOneID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name='CategoryOne Name', blank=False)
+
+    def __str__(self):
+        return self.Name
+    
+class CategoryTwo(models.Model):
+    CategoryTwoID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name='CategoryTwo Name', blank=False)
+
+    def __str__(self):
+        return self.Name
+
+class CategoryThree(models.Model):
+    CategoryThreeID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name='Category Three Name', blank=False)
+
+    def __str__(self):
+        return self.Name
+    
+class CategoryFour(models.Model):
+    CategoryFourID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name='Cateory Four Name', blank=False)
+
+    def __str__(self):
+        return self.Name
+
+class Product(models.Model):
+    ProductID = models.AutoField(primary_key=True)
+    ProductName = models.CharField(max_length=255, verbose_name='Product Name', blank=False)
+    Classes = models.ForeignKey(Classes, verbose_name="Classes", on_delete=models.DO_NOTHING)
+    ProductCategory = models.ForeignKey(ProductCategory, verbose_name="Product Category", on_delete=models.DO_NOTHING)
+    ProductCode = models.CharField(max_length=255, verbose_name='Product Code', blank=False)
+    Barcode = models.ImageField(upload_to='media/profile_pic')
+    Options = models.ForeignKey(Options, verbose_name='Options', on_delete=models.DO_NOTHING)
+    CategoryOne = models.ForeignKey(CategoryOne, verbose_name='Category One', on_delete=models.DO_NOTHING)
+    CategoryTwo = models.ForeignKey(CategoryTwo, verbose_name="Category Two", on_delete=models.DO_NOTHING)
+    CategoryThree = models.ForeignKey(CategoryThree, verbose_name="Category Three", on_delete=models.DO_NOTHING)
+    CategoryFour = models.ForeignKey(CategoryFour, verbose_name='Category Four', on_delete=models.DO_NOTHING)
+    SalesPrice = models.BigIntegerField(null=False, verbose_name="Sales Price")
+    CostPrice = models.BigIntegerField(null=False, verbose_name="Cost Price")
+    CommissionRate = models.BigIntegerField(null=False, verbose_name="Commission Rate")
+    MaxPrice = models.BigIntegerField(null=False, verbose_name='Maximum Price')
+    MinPrice = models.BigIntegerField(null=False, verbose_name="Minimum Price")
+    PerBoxPiece = models.BigIntegerField(null=False, verbose_name="Per Box Piece")
+    MarketingMaxPrice = models.BigIntegerField(null=False, verbose_name='MarketingMaxPrice')
+    MarketingMinPrice = models.BigIntegerField(null=False, verbose_name='MarketingMinPrice')
+    PerBoraPiece = models.BigIntegerField(null=False, verbose_name="PerBoraPiece")
+    AdminMaxPrice = models.BigIntegerField(null=False, verbose_name='AdminMaxPrice')
+    AdminMinPrice = models.BigIntegerField(null=False, verbose_name="AdminMinPrice")
+    ProductImage = models.ImageField(upload_to='media/profile_pic')
+    Description = models.TextField()
+    Gata = models.CharField(max_length=255, verbose_name="Gata", blank=False)
+    TitleMaterial = models.CharField(max_length=255, verbose_name="Title Material", blank=False)
+    Aster = models.CharField(max_length=255, verbose_name='Aster', blank=False)
+    InnerMaterial = models.CharField(max_length=255, verbose_name='Inner Material', blank=False)
+    PagesSheet = models.CharField(max_length=255, verbose_name='Pages and Sheet', blank=False)
+    PrintingRollingColor = models.CharField(max_length=255, verbose_name='Priting Rolling Color', blank=False)
+
+    def __str__(self):
+        return self.ProductName
+    
+class Mazdoor(models.Model):
+    MazdoorID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name="Mazdoor Name", blank=False)
+
+    def __str__(self) -> str:
+        return self.Name
+    
+
+class Lot(models.Model):
+    LotID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name="Lot Name", blank=False)
+
+    def __str__(self) -> str:
+        return self.Name
+    
+class Warehouse(models.Model):
+    WarehouseID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name="Warehouse Name", blank=False)
+
+    def __str__(self) -> str:
+        return self.Name
+
+class Stock(models.Model):
+    StockID = models.AutoField(primary_key=True)
+    Mazdoor = models.ForeignKey(Mazdoor, verbose_name="Mazdoor Name", on_delete=models.DO_NOTHING)
+    Lot = models.ForeignKey(Lot, verbose_name="Lot Name", on_delete=models.DO_NOTHING)
+    Product = models.ForeignKey(Product, verbose_name="Product Name", on_delete=models.DO_NOTHING)
+    Options = models.ForeignKey(Options, verbose_name="Option Name", on_delete=models.DO_NOTHING)
+    LabourAmount = models.BigIntegerField(null=False, verbose_name="Labour Amount")
+    Quantity = models.BigIntegerField(null=False, verbose_name="Quantity")
+    Warehouse = models.ForeignKey(Warehouse, verbose_name="Warehouse Name", on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return str(self.LabourAmount)
+
+class Account(models.Model):
+    AccountID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, unique=True, verbose_name='Accounts Name', blank=False)
+
+    def __str__(self) -> str:
+        return self.Name
+    
+class Transaction(models.Model):
+    TransactionID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, verbose_name="Transaction Name", blank=False)
+    date = models.DateField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.date} - {self.description}"
+
+class LedgerEntry(models.Model):
+    LedgerEntryID = models.AutoField(primary_key=True)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    DebitAmount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    CreditAmount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.transaction} - {self.account} - Debit: {self.DebitAmount}, Credit: {self.CreditAmount}"
+    
+class Employees(models.Model):
+    EmployeeID = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=255, blank=False, verbose_name="Employee Name")
+
+    def __str__(self):
+        return self.Name
+    
+class Salaries(models.Model):
+    SalaryID = models.AutoField(primary_key=True)
+    Amount = models.DecimalField(verbose_name="Salary Amount", max_digits=10, decimal_places=2)
+    Account = models.ForeignKey(Account, on_delete=models.DO_NOTHING)
+    Employees = models.ForeignKey(Employees, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return str(self.Amount)
+
+
+
+
 
 
 

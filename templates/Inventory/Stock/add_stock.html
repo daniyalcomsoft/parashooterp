@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-12">
+                    <h5 class="form-title"><span>Add Stock</span></h5>
+                </div>
+                <div class="row form-row">
+                <form method="post" action="{% url 'add_stock' %}" id="stockForm" >
+                    {% csrf_token %}
+                    <div class="row">
+                       {% include 'includes/messages.html' %}
+                  
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Mazdoor</label>
+                            <select class="form-control" name="MazdoorID" required>
+                                <option>Select Mazdoor</option>
+                                {% for maz in mazdoors %}
+                                <option value="{{maz.MazdoorID}}">{{maz.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Lots</label>
+                            <select class="form-control" name="LotID" required>
+                                <option>Select Lot</option>
+                                {% for lot in lots %}
+                                <option value="{{lot.LotID}}">{{lot.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Product</label>
+                            <select class="form-control" name="ProductID" required>
+                                <option>Select Product</option>
+                                {% for pd in products %}
+                                <option value="{{pd.ProductID}}">{{pd.ProductName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Options</label>
+                            <select class="form-control" name="OptionID" required>
+                                <option>Select Options</option>
+                                {% for op in options %}
+                                <option value="{{op.OptionID}}">{{op.OptionName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label>Labour Amount</label>
+                            <input type="number" class="form-control" name="LabourAmount" required>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" name="Quantity" required>
+                        </div>
+                       </div>
+
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Warehouse</label>
+                            <select class="form-control" name="WarehouseID" required>
+                                <option>Select Warehouse</option>
+                                {% for wh in warehouses %}
+                                <option value="{{wh.WarehouseID}}">{{wh.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+                        
+                        <!-- <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Stock</button>
+                        </div> -->
+
+                        <div class="col-12">
+                            <button type="button" class="btn btn-success" id="addRowBtn">Add Row</button>
+                            <button type="button" class="btn btn-primary" id="addStockBtn">Add Stock</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <!-- <div class="col-12">
+                    <button type="button" class="btn btn-success" id="addRowBtn">Add Row</button> 
+                    <button type="button" class="btn btn-primary" id="addStockBtn">Add Stock</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

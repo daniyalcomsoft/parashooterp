@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_ledgerentry' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Ledger Entry</span></h5>
+                        </div>
+                        {% include 'includes/messages.html' %}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="LedgerEntryID" value="{{ledger_entry.LedgerEntryID}}" required hidden>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Account</label>
+                                <select class="form-control" name="account" required>
+                                    {% for account in accounts %}
+                                    <option value="{{ account.AccountID }}" {% if account.AccountID == ledger_entry.account.AccountID %} selected {% endif %}>{{ account.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Transaction</label>
+                                <select class="form-control" name="transaction" required>
+                                    {% for transaction in transactions %}
+                                    <option value="{{ transaction.TransactionID }}" {% if transaction.TransactionID == ledger_entry.transaction.TransactionID %} selected {% endif %}>{{ transaction.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" class="form-control" name="amount" value="{{ ledger_entry.amount }}" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Debit Amount </label>
+                                <input type="text" class="form-control" name="DebitAmount" value="{{ ledger_entry.DebitAmount }}" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Credit Amount</label>
+                                <input type="text" class="form-control" name="CreditAmount" value="{{ ledger_entry.CreditAmount }}" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Ledger Entry</button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

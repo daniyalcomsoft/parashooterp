@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Product</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" class="form-control" name="ProductName" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Classes</label>
+                            <select class="form-control" name="ClassID" required>
+                                <option>Select Class</option>   
+                                {% for cls in classes %}                             
+                                <option value="{{cls.ClassID}}">{{cls.ClassName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Product Category</label>
+                            <select class="form-control" name="ProductCategoryID" required>
+                                <option>Select Product Category</option>   
+                                {% for pc in pcat %}                             
+                                <option value="{{ pc.ProductCategoryID }}">{{ pc.ProductCategoryName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Product Code</label>
+                            <input type="text" class="form-control" name="ProductCode" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Barcode</label>
+                            <input type="file" class="form-control" name="Barcode">
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Options</label>
+                            <select class="form-control" name="OptionID" required>
+                                <option>Select Options</option>    
+                                {% for op in opt %}                            
+                                <option value="{{op.OptionID}}">{{op.OptionName}}</option>
+                                {% endfor %}
+                            </select>   
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Category 1</label>
+                            <select class="form-control" name="CategoryOneID" required>
+                                <option>Select Category One</option>
+                                {% for co in cone %}                                
+                                <option value="{{co.CategoryOneID}}">{{co.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Category 2</label>
+                            <select class="form-control" name="CategoryTwoID" required>
+                                <option>Select Category Two</option>                                
+                                {% for ct in ctwo %}                                
+                                <option value="{{ct.CategoryTwoID}}">{{ct.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Category 3</label>
+                            <select class="form-control" name="CategoryThreeID" required>
+                                <option>Select Category Three</option>      
+                                {% for cth in cthree %}                          
+                                <option value="{{cth.CategoryThreeID}}">{{cth.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Category 4</label>
+                            <select class="form-control" name="CategoryFourID" required>
+                                <option>Select Category Four</option>        
+                                {% for cf in cfour %}                        
+                                <option value="{{cf.CategoryFourID}}">{{cf.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>SalesPrice</label>
+                            <input type="text" class="form-control" name="SalesPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Cost Price</label>
+                            <input type="text" class="form-control" name="CostPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Comission Rate</label>
+                            <input type="text" class="form-control" name="CommissionRate" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Maximum Price</label>
+                            <input type="text" class="form-control" name="MaxPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Minimum Price</label>
+                            <input type="text" class="form-control" name="MinPrice" required>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Per Box Pieces</label>
+                            <input type="text" class="form-control" name="PerBoxPiece" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Marketing Maximum Price</label>
+                            <input type="text" class="form-control" name="MarketingMaxPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Marketing  Minimum Price</label>
+                            <input type="text" class="form-control" name="MarketingMinPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Per Bora Pieces</label>
+                            <input type="text" class="form-control" name="PerBoraPiece" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Admin Maximum Price</label>
+                            <input type="text" class="form-control" name="AdminMaxPrice" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Admin  Minimum Price</label>
+                            <input type="text" class="form-control" name="AdminMinPrice" required>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Product Image</label>
+                            <input type="file" class="form-control" name="ProductImage">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" class="form-control" name="Description" required></textarea>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <h3>Production Details</h3>
+                        </div>
+                    </div>
+
+                    <br><br>
+
+                    <!-- <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Province</label>
+                            <select class="form-control" name="ProvinceID" required>
+                                <option>Select Province</option>
+                                {% for prov in province %}
+                                <option value="{{prov.ProvinceID}}">{{prov.ProvinceName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">City</label>
+                            <select class="form-control" name="CityID" required>
+                                <option>Select City</option>
+                                {% for city in cit %}
+                                <option value="{{city.CityID}}">{{city.CityName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Area</label>
+                            <select class="form-control" name="AreaID" required>
+                                <option>Select Area</option>
+                                {% for are in area %}
+                                <option value="{{are.AreaID}}">{{are.AreaName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div>
+
+                       <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Type</label>
+                            <select class="form-control" name="CustTypeID" required>
+                                <option>Select Type</option>
+                                {% for custtyp in custtype %}
+                                <option value="{{custtyp.CustTypeID}}">{{custtyp.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div> -->
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Gata</label>
+                                <input type="text" class="form-control" name="Gata" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Title Material</label>
+                                <input type="text" class="form-control" name="TitleMaterial" required>
+                            </div>
+                        </div>
+
+                           <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Aster</label>
+                                <input type="text" class="form-control" name="Aster" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Inner Material</label>
+                                <input type="text" class="form-control" name="InnerMaterial" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Pages / Sheets</label>
+                                <input type="text" class="form-control" name="PagesSheet" required>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Printing / Roling Color</label>
+                                <input type="text" class="form-control" name="PrintingRollingColor" required>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

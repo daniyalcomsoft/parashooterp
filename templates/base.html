@@ -333,12 +333,118 @@
     <script src="{% static 'assets/plugins/datatables/datatables.min.js'%}"></script>
     <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
     <!-- <script src="{% static 'assets/index.js' %}"></script> -->
 
 
     <script src="{% static 'assets/datetimepicker/jquery-ui.js' %}"></script>
     <script src="{% static 'assets/datetimepicker/jquery-ui-timepicker-addon.js' %}"></script>
+
+
+    <!-- <script>
+      $(document).ready(function() {
+          // Counter for dynamic row IDs
+          var rowCount = 1;
+  
+          // Event handler for Add Row button
+          $("#addRowBtn").click(function() {
+              // Clone the last form row
+              var newRow = $(".form-row:last").clone();
+  
+              // Increment IDs and reset input values
+              newRow.find("select, input").each(function() {
+                  var oldID = $(this).attr("id");
+  
+                  // Check if oldID is defined
+                  if (oldID !== undefined) {
+                      var newID = oldID.replace(/\d+/, rowCount);
+                      $(this).attr("id", newID).attr("name", newID).val('');
+                  }
+              });
+  
+              // Append the new row to the form
+              $(".form-row:last").after(newRow);
+  
+              // Increment row count
+              rowCount++;
+          });
+      });
+  </script> -->
+
+
+  <!-- <script>
+   $(document).ready(function() {
+       var rowCount = 1;
+
+       $("#addRowBtn").click(function() {
+           // Clone the last form row
+           var newRow = $(".form-row:last").clone();
+
+           // Increment IDs and reset input values
+           newRow.find("select, input").each(function() {
+               var oldID = $(this).attr("id");
+
+               // Check if oldID is defined
+               if (oldID !== undefined) {
+                   var newID = oldID.replace(/\d+/, rowCount);
+                   $(this).attr("id", newID).attr("name", newID).val('');
+               }
+           });
+
+           // Append the new row to the form
+           $(".form-row:last").after(newRow);
+
+           // Increment row count
+           rowCount++;
+       });
+
+       // Event handler for Add Stock button
+       $("#addStockBtn").click(function() {
+           // Submit the form
+           $("form").submit();
+       });
+   });
+</script> -->
+
+
+<script>
+   $(document).ready(function() {
+    var rowCount = 1;
+
+    $("#addRowBtn").click(function() {
+        // Clone the last form row
+        var newRow = $(".form-row:last").clone();
+
+        // Increment IDs and reset input values
+        newRow.find("select, input").each(function() {
+            var oldID = $(this).attr("id");
+
+            // Check if oldID is defined
+            if (oldID !== undefined) {
+                var newID = oldID.replace(/\d+/, rowCount);
+                $(this).attr("id", newID).attr("name", newID).val('');
+            }
+        });
+
+        // Append the new row to the form
+        $(".form-row:last").after(newRow);
+
+        // Increment row count
+        rowCount++;
+
+        // Update the total_records hidden input
+        $("#total_records").val(rowCount);
+    });
+
+    // Event handler for Add Stock button
+    $("#addStockBtn").click(function() {
+        // Submit the form
+        $("#stockForm").submit();
+    });
+});
+
+</script>
+
 
     <script>
       // $('[data-provide="datepicker"]').datetimepicker({
@@ -697,6 +803,8 @@
          }
       }
    </script>
+
+
 
      
     

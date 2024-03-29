@@ -6,13 +6,13 @@
   <div class="page-header">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="page-title">Client</h3>
+        <h3 class="page-title">Company</h3>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Dashboard</a></li>
-          <li class="breadcrumb-item active">Client</li>
+          <li class="breadcrumb-item active">Company</li>
         </ul>
       </div>
-      <div class="col-auto text-right float-right ml-auto">\
+      <div class="col-auto text-right float-right ml-auto">
         <a href="{% url 'add_company' %}" class="btn btn-primary"
           ><i class="fas fa-plus"></i
         ></a>
@@ -25,7 +25,7 @@
       <div class="card card-table">
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-hover table-bordered table-center mb-0 datatable">
+            <table id='table_id' class="table table-hover table-bordered table-center mb-0 datatable">
               <thead>
                 <tr>
                   <!-- <th>ID</th> -->

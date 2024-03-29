@@ -1,11 +1,10 @@
-from asyncio.windows_events import NULL
-from dataclasses import Field
+# from dataclasses import Field
 from datetime import datetime
-from itertools import count
-from queue import Empty
-import re
-from tabnanny import check
-from django.shortcuts import render, redirect, HttpResponse
+# from itertools import count
+# from queue import Empty
+# import re
+# from tabnanny import check
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from parashooterp import settings
 from parashootapp.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
@@ -14,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from parashootapp.models import *
 from parashootapp.forms import *
 from datetime import datetime
+import logging
 
 
 
@@ -76,6 +76,10 @@ def PROFILE_UPDATE(request):
         except:
             messages.error(request, "Failed to Update your profile")
     return render(request, 'profile.html')
+
+@login_required(login_url='/')
+def HOME(request):
+    return render(request, 'hod/Home.html')
 
 def load_city(request):
     country = request.GET.get('country')
@@ -2320,6 +2324,165 @@ def Delete_Options(request, id):
     return redirect('view_options')
 
 
+# def Add_CategoryOne(request):
+#     if request.method == "POST":
+#         Name = request.POST.get('Name')
+#         co = CategoryOne (
+#             Name = Name
+#         )
+#         co.save()
+#         messages.success(request, 'Category One has been added successfully')
+#         return redirect('view_categoryone')
+#     return render(request, 'Inventory/CategoryOne/add_categoryone.html')
+
+# def View_CategoryOne(request):
+#     co = CategoryOne.objects.all()
+#     context = {
+#         'co': co
+#     }
+#     return render(request, 'Inventory/CategoryOne/view_categoryone.html', context)
+
+# def Edit_CategoryOne(request, id):
+#     co = CategoryOne.objects.get(CategoryOneID=id)
+#     context = {
+#         'co': co
+#     }
+#     return render(request, 'Inventory/CategoryOne/edit_categoryone.html', context)
+
+# def Update_CategoryOne(request):
+#     if request.method == "POST":
+#         CategoryOneID = request.POST.get('CategoryOneID')
+#         Name = request.POST.get('Name')
+#         co = CategoryOne.objects.get(CategoryOneID=CategoryOneID)
+#         co.Name = Name
+#         co.save()
+#         messages.success(request, 'Inventory/CategoryOne/view_categoryone.html')
+#         return redirect('view_options')
+#     return render(request, 'Inventory/CategoryOne/view_categoryone.html')
+
+# def Delete_CategoryOne(request, id):
+#     co = CategoryOne.objects.get(CategoryOneID=id)
+#     co.delete()
+#     messages.success(request, "CategoryOne has been deleted")
+#     return redirect('view_categoryone')
+
+
+# views.py
+
+def Add_CategoryTwo(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        ct = CategoryTwo(Name=Name)
+        ct.save()
+        messages.success(request, 'Category Two has been added successfully')
+        return redirect('view_categorytwo')
+    return render(request, 'Inventory/CategoryTwo/add_categorytwo.html')
+
+def View_CategoryTwo(request):
+    ct = CategoryTwo.objects.all()
+    context = {'ct': ct}
+    return render(request, 'Inventory/CategoryTwo/view_categorytwo.html', context)
+
+def Edit_CategoryTwo(request, id):
+    ct = CategoryTwo.objects.get(CategoryTwoID=id)
+    context = {'ct': ct}
+    return render(request, 'Inventory/CategoryTwo/edit_categorytwo.html', context)
+
+def Update_CategoryTwo(request):
+    if request.method == "POST":
+        CategoryTwoID = request.POST.get('CategoryTwoID')
+        Name = request.POST.get('Name')
+        ct = CategoryTwo.objects.get(CategoryTwoID=CategoryTwoID)
+        ct.Name = Name
+        ct.save()
+        messages.success(request, 'CategoryTwo has been updated successfully')
+        return redirect('view_categorytwo')
+    return render(request, 'Inventory/CategoryTwo/view_categorytwo.html')
+
+def Delete_CategoryTwo(request, id):
+    ct = CategoryTwo.objects.get(CategoryTwoID=id)
+    ct.delete()
+    messages.success(request, 'CategoryTwo has been deleted')
+    return redirect('view_categorytwo')
+
+# Repeat the same pattern for CategoryThree and CategoryFour (add, view, edit, update, delete) with appropriate model names.
+
+# views.py
+
+def Add_CategoryThree(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        cthree = CategoryThree(Name=Name)
+        cthree.save()
+        messages.success(request, 'Category Three has been added successfully')
+        return redirect('view_categorythree')
+    return render(request, 'Inventory/CategoryThree/add_categorythree.html')
+
+def View_CategoryThree(request):
+    cthree = CategoryThree.objects.all()
+    context = {'cthree': cthree}
+    return render(request, 'Inventory/CategoryThree/view_categorythree.html', context)
+
+def Edit_CategoryThree(request, id):
+    cthree = CategoryThree.objects.get(CategoryThreeID=id)
+    context = {'cthree': cthree}
+    return render(request, 'Inventory/CategoryThree/edit_categorythree.html', context)
+
+def Update_CategoryThree(request):
+    if request.method == "POST":
+        CategoryThreeID = request.POST.get('CategoryThreeID')
+        Name = request.POST.get('Name')
+        cthree = CategoryThree.objects.get(CategoryThreeID=CategoryThreeID)
+        cthree.Name = Name
+        cthree.save()
+        messages.success(request, 'CategoryThree has been updated successfully')
+        return redirect('view_categorythree')
+    return render(request, 'Inventory/CategoryThree/view_categorythree.html')
+
+def Delete_CategoryThree(request, id):
+    cthree = CategoryThree.objects.get(CategoryThreeID=id)
+    cthree.delete()
+    messages.success(request, 'CategoryThree has been deleted')
+    return redirect('view_categorythree')
+
+
+def Add_CategoryFour(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        cfour = CategoryFour(Name=Name)
+        cfour.save()
+        messages.success(request, 'Category Four has been added successfully')
+        return redirect('view_categoryfour')
+    return render(request, 'Inventory/CategoryFour/add_categoryfour.html')
+
+def View_CategoryFour(request):
+    cfour = CategoryFour.objects.all()
+    context = {'cfour': cfour}
+    return render(request, 'Inventory/CategoryFour/view_categoryfour.html', context)
+
+def Edit_CategoryFour(request, id):
+    cfour = CategoryFour.objects.get(CategoryFourID=id)
+    context = {'cfour': cfour}
+    return render(request, 'Inventory/CategoryFour/edit_categoryfour.html', context)
+
+def Update_CategoryFour(request):
+    if request.method == "POST":
+        CategoryFourID = request.POST.get('CategoryFourID')
+        Name = request.POST.get('Name')
+        cfour = CategoryFour.objects.get(CategoryFourID=CategoryFourID)
+        cfour.Name = Name
+        cfour.save()
+        messages.success(request, 'CategoryFour has been updated successfully')
+        return redirect('view_categoryfour')
+    return render(request, 'Inventory/CategoryFour/view_categoryfour.html')
+
+def Delete_CategoryFour(request, id):
+    cfour = CategoryFour.objects.get(CategoryFourID=id)
+    cfour.delete()
+    messages.success(request, 'CategoryFour has been deleted')
+    return redirect('view_categoryfour')
+
+
 
 
 
@@ -2397,3 +2560,924 @@ def Delete_Options(request, id):
 #     messages.success(request, 'Customer Type has been deleted successfully')
 #     return redirect('view_customertype')
 
+
+
+def Add_CategoryOne(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        category_one = CategoryOne(Name=Name)
+        category_one.save()
+        messages.success(request, 'Category One has been added successfully')
+        return redirect('view_categoryone')
+    return render(request, 'Inventory/CategoryOne/add_categoryone.html')
+
+def View_CategoryOne(request):
+    category_ones = CategoryOne.objects.all()
+    context = {
+        'category_ones': category_ones
+    }
+    return render(request, 'Inventory/CategoryOne/view_categoryone.html', context)
+
+def Edit_CategoryOne(request, id):
+    category_one = get_object_or_404(CategoryOne, CategoryOneID=id)
+    context = {
+        'category_one': category_one
+    }
+    return render(request, 'Inventory/CategoryOne/edit_categoryone.html', context)
+
+def Update_CategoryOne(request):
+    if request.method == "POST":
+        CategoryOneID = request.POST.get('CategoryOneID')
+        Name = request.POST.get('Name')
+        category_one = CategoryOne.objects.get(CategoryOneID=CategoryOneID)
+        category_one.Name = Name
+        category_one.save()
+        messages.success(request, 'Category One has been updated successfully')
+        return redirect('view_categoryone')
+    return render(request, 'Inventory/CategoryOne/view_categoryone.html')
+
+# def Update_CategoryOne(request):
+#     if request.method == "POST":
+#         CategoryOneID = request.POST.get('CategoryOneID')
+#         Name = request.POST.get('Name')
+#         co = CategoryOne.objects.get(CategoryOneID=CategoryOneID)
+#         co.Name = Name
+#         co.save()
+#         messages.success(request, 'Inventory/CategoryOne/view_categoryone.html')
+#         return redirect('view_options')
+#     return render(request, 'Inventory/CategoryOne/view_categoryone.html')
+
+def Delete_CategoryOne(request, id):
+    category_one = get_object_or_404(CategoryOne, CategoryOneID=id)
+    category_one.delete()
+    messages.success(request, "Category One has been deleted")
+    return redirect('view_categoryone')
+
+
+
+# def Add_Product(request):
+#     return render(request, 'Inventory/Products/add_product.html')
+
+
+
+
+
+
+# views.py
+
+def Add_Product(request):
+    classes = Classes.objects.all()
+    pcat = ProductCategory.objects.all()
+    opt = Options.objects.all()
+    cone = CategoryOne.objects.all()
+    ctwo = CategoryTwo.objects.all()
+    cthree = CategoryThree.objects.all()
+    cfour = CategoryFour.objects.all()
+
+
+    if request.method == "POST":
+        ClassID = request.POST.get('ClassID')
+        ProductCategoryID = request.POST.get('ProductCategoryID')
+        OptionID = request.POST.get('OptionID')
+        CategoryOneID = request.POST.get('CategoryOneID')
+        CategoryTwoID = request.POST.get('CategoryTwoID')
+        CategoryThreeID = request.POST.get('CategoryThreeID')
+        CategoryFourID = request.POST.get('CategoryFourID')
+
+        ProductName = request.POST.get('ProductName')
+        ProductCode = request.POST.get('ProductCode')
+        Barcode = request.FILES['Barcode']
+        SalesPrice = request.POST.get('SalesPrice')
+        CostPrice = request.POST.get('CostPrice')
+        CommissionRate = request.POST.get('CommissionRate')
+        MaxPrice = request.POST.get('MaxPrice')
+        MinPrice = request.POST.get('MinPrice')
+        PerBoxPiece = request.POST.get('PerBoxPiece')
+        MarketingMaxPrice = request.POST.get('MarketingMaxPrice')
+        MarketingMinPrice = request.POST.get('MarketingMinPrice')
+        PerBoraPiece = request.POST.get('PerBoraPiece')
+        AdminMaxPrice = request.POST.get('AdminMaxPrice')
+        AdminMinPrice = request.POST.get('AdminMinPrice')
+        ProductImage = request.FILES['ProductImage']
+        Description = request.POST.get('Description')
+        Gata = request.POST.get('Gata')
+        TitleMaterial = request.POST.get('TitleMaterial')
+        Aster = request.POST.get('Aster')
+        InnerMaterial = request.POST.get('InnerMaterial')
+        PagesSheet = request.POST.get('PagesSheet')
+        PrintingRollingColor = request.POST.get('PrintingRollingColor')
+
+        classes = Classes.objects.get(ClassID=ClassID)
+        pcat = ProductCategory.objects.get(ProductCategoryID=ProductCategoryID)
+        opt = Options.objects.get(OptionID=OptionID)
+        cone = CategoryOne.objects.get(CategoryOneID=CategoryOneID)
+        ctwo = CategoryTwo.objects.get(CategoryTwoID=CategoryTwoID)
+        cthree = CategoryThree.objects.get(CategoryThreeID=CategoryThreeID)
+        cfour = CategoryFour.objects.get(CategoryFourID=CategoryFourID)
+
+        product = Product(
+            ProductName=ProductName,
+            Classes=classes,
+            ProductCategory=pcat,
+            ProductCode=ProductCode,
+            Barcode=Barcode,
+            Options=opt,
+            CategoryOne=cone,
+            CategoryTwo=ctwo,
+            CategoryThree=cthree,
+            CategoryFour=cfour,
+            SalesPrice=SalesPrice,
+            CostPrice=CostPrice,
+            CommissionRate=CommissionRate,
+            MaxPrice=MaxPrice,
+            MinPrice=MinPrice,
+            PerBoxPiece=PerBoxPiece,
+            MarketingMaxPrice=MarketingMaxPrice,
+            MarketingMinPrice=MarketingMinPrice,
+            PerBoraPiece=PerBoraPiece,
+            AdminMaxPrice=AdminMaxPrice,
+            AdminMinPrice=AdminMinPrice,
+            ProductImage=ProductImage,
+            Description=Description,
+            Gata=Gata,
+            TitleMaterial=TitleMaterial,
+            Aster=Aster,
+            InnerMaterial=InnerMaterial,
+            PagesSheet=PagesSheet,
+            PrintingRollingColor=PrintingRollingColor
+        )
+        product.save()
+        messages.success(request, 'Product has been added successfully')
+        return redirect('view_product')
+    context = {
+        'classes':classes, 'pcat':pcat, 'opt':opt, 'cone':cone, 'ctwo':ctwo, 'cthree':cthree, 'cfour':cfour
+    }
+    return render(request, 'Inventory/Products/add_product.html', context)
+
+
+
+def View_Product(request):
+    prod = Product.objects.all()
+    context = {'prod': prod}
+    return render(request, 'Inventory/Products/view_product.html', context)
+
+def Edit_Product(request, id):
+    product = Product.objects.get(ProductID=id)
+    classes = Classes.objects.all()
+    pcat = ProductCategory.objects.all()
+    opt = Options.objects.all()
+    cone = CategoryOne.objects.all()
+    ctwo = CategoryTwo.objects.all()
+    cthree = CategoryThree.objects.all()
+    cfour = CategoryFour.objects.all()
+    context = {
+        'product': product,
+        'classes':classes,
+        'pcat':pcat,
+        'opt':opt,
+        'cone':cone,
+        'ctwo':ctwo,
+        'cthree':cthree,
+        'cfour':cfour
+
+        }
+    return render(request, 'Inventory/Products/edit_product.html', context)
+
+def Update_Product(request):
+    # Fetch the product instance based on the product_id
+    # product = get_object_or_404(Product, ProductID=product_id)
+
+    # Fetch all the required data for dropdowns
+
+    # classes = Classes.objects.all()
+    # pcat = ProductCategory.objects.all()
+    # opt = Options.objects.all()
+    # cone = CategoryOne.objects.all()
+    # ctwo = CategoryTwo.objects.all()
+    # cthree = CategoryThree.objects.all()
+    # cfour = CategoryFour.objects.all()
+
+    if request.method == "POST":
+        # Extract form data
+        ClassID = request.POST.get('ClassID')
+        ProductCategoryID = request.POST.get('ProductCategoryID')
+        OptionID = request.POST.get('OptionID')
+        CategoryOneID = request.POST.get('CategoryOneID')
+        CategoryTwoID = request.POST.get('CategoryTwoID')
+        CategoryThreeID = request.POST.get('CategoryThreeID')
+        CategoryFourID = request.POST.get('CategoryFourID')
+        ProductID = request.POST.get('ProductID')
+
+        ProductName = request.POST.get('ProductName')
+        ProductCode = request.POST.get('ProductCode')
+        Barcode = request.FILES['Barcode']
+        SalesPrice = request.POST.get('SalesPrice')
+        CostPrice = request.POST.get('CostPrice')
+        CommissionRate = request.POST.get('CommissionRate')
+        MaxPrice = request.POST.get('MaxPrice')
+        MinPrice = request.POST.get('MinPrice')
+        PerBoxPiece = request.POST.get('PerBoxPiece')
+        MarketingMaxPrice = request.POST.get('MarketingMaxPrice')
+        MarketingMinPrice = request.POST.get('MarketingMinPrice')
+        PerBoraPiece = request.POST.get('PerBoraPiece')
+        AdminMaxPrice = request.POST.get('AdminMaxPrice')
+        AdminMinPrice = request.POST.get('AdminMinPrice')
+        ProductImage = request.FILES['ProductImage']
+        Description = request.POST.get('Description')
+        Gata = request.POST.get('Gata')
+        TitleMaterial = request.POST.get('TitleMaterial')
+        Aster = request.POST.get('Aster')
+        InnerMaterial = request.POST.get('InnerMaterial')
+        PagesSheet = request.POST.get('PagesSheet')
+        PrintingRollingColor = request.POST.get('PrintingRollingColor')
+
+        # Update the product instance with the new data
+        product = Product.objects.get(ProductID=ProductID)
+
+        product.ProductName = ProductName
+        product.Classes = Classes.objects.get(ClassID=ClassID)
+        product.ProductCategory = ProductCategory.objects.get(ProductCategoryID=ProductCategoryID)
+        product.ProductCode = ProductCode
+        product.Barcode = Barcode
+        product.Options = Options.objects.get(OptionID=OptionID)
+        product.CategoryOne = CategoryOne.objects.get(CategoryOneID=CategoryOneID)
+        product.CategoryTwo = CategoryTwo.objects.get(CategoryTwoID=CategoryTwoID)
+        product.CategoryThree = CategoryThree.objects.get(CategoryThreeID=CategoryThreeID)
+        product.CategoryFour = CategoryFour.objects.get(CategoryFourID=CategoryFourID)
+        product.SalesPrice = SalesPrice
+        product.CostPrice = CostPrice
+        product.CommissionRate = CommissionRate
+        product.MaxPrice = MaxPrice
+        product.MinPrice = MinPrice
+        product.PerBoxPiece = PerBoxPiece
+        product.MarketingMaxPrice = MarketingMaxPrice
+        product.MarketingMinPrice = MarketingMinPrice
+        product.PerBoraPiece = PerBoraPiece
+        product.AdminMaxPrice = AdminMaxPrice
+        product.AdminMinPrice = AdminMinPrice
+        product.ProductImage = ProductImage
+        product.Description = Description
+        product.Gata = Gata
+        product.TitleMaterial = TitleMaterial
+        product.Aster = Aster
+        product.InnerMaterial = InnerMaterial
+        product.PagesSheet = PagesSheet
+        product.PrintingRollingColor = PrintingRollingColor
+
+        # Save the updated product instance
+        product.save()
+
+        messages.success(request, 'Product has been updated successfully')
+        return redirect('view_product')
+
+    # Prepare context data
+    # context = {
+    #     'product': product,
+    #     'classes': classes,
+    #     'pcat': pcat,
+    #     'opt': opt,
+    #     'cone': cone,
+    #     'ctwo': ctwo,
+    #     'cthree': cthree,
+    #     'cfour': cfour
+    # }
+    return render(request, 'Inventory/Products/edit_product.html')
+
+
+def Delete_Product(request, id):
+    product = Product.objects.get(ProductID=id)
+    product.delete()
+    messages.success(request, 'Product has been deleted')
+    return redirect('view_product')
+
+
+def Add_Mazdoor(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        mazdoor = Mazdoor(Name=Name)
+        mazdoor.save()
+        messages.success(request, 'Mazdoor has been added successfully')
+        return redirect('view_mazdoor')
+    return render(request, 'Inventory/Mazdoor/add_mazdoor.html')
+
+def View_Mazdoor(request):
+    mazdoors = Mazdoor.objects.all()
+    context = {
+        'mazdoors': mazdoors
+    }
+    return render(request, 'Inventory/Mazdoor/view_mazdoor.html', context)
+
+def Edit_Mazdoor(request, id):
+    mazdoor = Mazdoor.objects.get(MazdoorID=id)
+    context = {
+        'mazdoor': mazdoor
+    }
+    return render(request, 'Inventory/Mazdoor/edit_mazdoor.html', context)
+
+def Update_Mazdoor(request):
+    if request.method == "POST":
+        MazdoorID = request.POST.get('MazdoorID')
+        Name = request.POST.get('Name')
+        mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+        mazdoor.Name = Name
+        mazdoor.save()
+        messages.success(request, 'Mazdoor has been updated successfully')
+        return redirect('view_mazdoor')
+    return render(request, 'Inventory/Mazdoor/view_mazdoor.html')
+
+def Delete_Mazdoor(request, id):
+    mazdoor = Mazdoor.objects.get(MazdoorID=id)
+    mazdoor.delete()
+    messages.success(request, 'Mazdoor has been deleted')
+    return redirect('view_mazdoor')
+
+
+def Add_Lot(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        lot = Lot(Name=Name)
+        lot.save()
+        messages.success(request, 'Lot has been added successfully')
+        return redirect('view_lot')
+    return render(request, 'Inventory/Lot/add_lot.html')
+
+def View_Lot(request):
+    lots = Lot.objects.all()
+    context = {
+        'lots': lots
+    }
+    return render(request, 'Inventory/Lot/view_lot.html', context)
+
+def Edit_Lot(request, id):
+    lot = Lot.objects.get(LotID=id)
+    context = {
+        'lot': lot
+    }
+    return render(request, 'Inventory/Lot/edit_lot.html', context)
+
+def Update_Lot(request):
+    if request.method == "POST":
+        LotID = request.POST.get('LotID')
+        Name = request.POST.get('Name')
+        lot = Lot.objects.get(LotID=LotID)
+        lot.Name = Name
+        lot.save()
+        messages.success(request, 'Lot has been updated successfully')
+        return redirect('view_lot')
+    return render(request, 'Inventory/Lot/view_lot.html')
+
+def Delete_Lot(request, id):
+    lot = Lot.objects.get(LotID=id)
+    lot.delete()
+    messages.success(request, 'Lot has been deleted')
+    return redirect('view_lot')
+
+def Add_Warehouse(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        warehouse = Warehouse(Name=Name)
+        warehouse.save()
+        messages.success(request, 'Warehouse has been added successfully')
+        return redirect('view_warehouse')
+    return render(request, 'Inventory/Warehouse/add_warehouse.html')
+
+def View_Warehouse(request):
+    warehouses = Warehouse.objects.all()
+    context = {
+        'warehouses': warehouses
+    }
+    return render(request, 'Inventory/Warehouse/view_warehouse.html', context)
+
+def Edit_Warehouse(request, id):
+    warehouse = Warehouse.objects.get(WarehouseID=id)
+    context = {
+        'warehouse': warehouse
+    }
+    return render(request, 'Inventory/Warehouse/edit_warehouse.html', context)
+
+def Update_Warehouse(request):
+    if request.method == "POST":
+        WarehouseID = request.POST.get('WarehouseID')
+        Name = request.POST.get('Name')
+        warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+        warehouse.Name = Name
+        warehouse.save()
+        messages.success(request, 'Warehouse has been updated successfully')
+        return redirect('view_warehouse')
+    return render(request, 'Inventory/Warehouse/view_warehouse.html')
+
+def Delete_Warehouse(request, id):
+    warehouse = Warehouse.objects.get(WarehouseID=id)
+    warehouse.delete()
+    messages.success(request, 'Warehouse has been deleted')
+    return redirect('view_warehouse')
+
+def Add_Stock(request):
+    mazdoors = Mazdoor.objects.all()
+    lots = Lot.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+    warehouses = Warehouse.objects.all()
+
+    if request.method == "POST":
+        MazdoorID = request.POST.get('MazdoorID')
+        LotID = request.POST.get('LotID')
+        ProductID = request.POST.get('ProductID')
+        OptionID = request.POST.get('OptionID')
+        LabourAmount = request.POST.get('LabourAmount')
+        Quantity = request.POST.get('Quantity')
+        WarehouseID = request.POST.get('WarehouseID')
+
+        mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+        lot = Lot.objects.get(LotID=LotID)
+        product = Product.objects.get(ProductID=ProductID)
+        option = Options.objects.get(OptionID=OptionID)
+        warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+
+        stock = Stock(
+            Mazdoor=mazdoor,
+            Lot=lot,
+            Product=product,
+            Options=option,
+            LabourAmount=LabourAmount,
+            Quantity=Quantity,
+            Warehouse=warehouse
+        )
+        stock.save()
+        messages.success(request, 'Stock has been added successfully')
+        return redirect('view_stock')
+
+    context = {
+        'mazdoors': mazdoors,
+        'lots': lots,
+        'products': products,
+        'options': options,
+        'warehouses': warehouses
+    }
+    return render(request, 'Inventory/Stock/add_stock.html', context)
+
+# def Add_Stock(request):
+#     mazdoors = Mazdoor.objects.all()
+#     lots = Lot.objects.all()
+#     products = Product.objects.all()
+#     options = Options.objects.all()
+#     warehouses = Warehouse.objects.all()
+
+#     if request.method == "POST":
+#         # Handle the submitted form data
+#         for key, value in request.POST.items():
+#             if key.startswith('MazdoorID'):
+#                 # Extract the row number from the key
+#                 row_number = key.split('_')[1]
+                
+#                 # Use the row number to construct the field names
+#                 MazdoorID = request.POST.get(f'MazdoorID_{row_number}')
+#                 LotID = request.POST.get(f'LotID_{row_number}')
+#                 ProductID = request.POST.get(f'ProductID_{row_number}')
+#                 OptionID = request.POST.get(f'OptionID_{row_number}')
+#                 LabourAmount = request.POST.get(f'LabourAmount_{row_number}')
+#                 Quantity = request.POST.get(f'Quantity_{row_number}')
+#                 WarehouseID = request.POST.get(f'WarehouseID_{row_number}')
+
+#                 # Create and save the Stock instance
+#                 mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+#                 lot = Lot.objects.get(LotID=LotID)
+#                 product = Product.objects.get(ProductID=ProductID)
+#                 option = Options.objects.get(OptionID=OptionID)
+#                 warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+
+#                 stock = Stock(
+#                     Mazdoor=mazdoor,
+#                     Lot=lot,
+#                     Product=product,
+#                     Options=option,
+#                     LabourAmount=LabourAmount,
+#                     Quantity=Quantity,
+#                     Warehouse=warehouse
+#                 )
+#                 stock.save()
+
+#         messages.success(request, 'Stock has been added successfully')
+#         return redirect('view_stock')
+
+#     context = {
+#         'mazdoors': mazdoors,
+#         'lots': lots,
+#         'products': products,
+#         'options': options,
+#         'warehouses': warehouses
+#     }
+#     return render(request, 'Inventory/Stock/add_stock.html', context)
+
+# def Add_Stock(request):
+#     mazdoors = Mazdoor.objects.all()
+#     lots = Lot.objects.all()
+#     products = Product.objects.all()
+#     options = Options.objects.all()
+#     warehouses = Warehouse.objects.all()
+
+#     if request.method == "POST":
+#         # Handle the submitted form data
+#         for key, value in request.POST.items():
+#             if key.startswith('MazdoorID'):
+#                 # Extract the row number from the key
+#                 split_key = key.split('_')
+
+#                 # Check if the split produced at least two elements
+#                 if len(split_key) >= 2:
+#                     row_number = split_key[1]
+
+#                     # Use the row number to construct the field names
+#                     MazdoorID = request.POST.get(f'MazdoorID_{row_number}')
+#                     LotID = request.POST.get(f'LotID_{row_number}')
+#                     ProductID = request.POST.get(f'ProductID_{row_number}')
+#                     OptionID = request.POST.get(f'OptionID_{row_number}')
+#                     LabourAmount = request.POST.get(f'LabourAmount_{row_number}')
+#                     Quantity = request.POST.get(f'Quantity_{row_number}')
+#                     WarehouseID = request.POST.get(f'WarehouseID_{row_number}')
+
+#                     # Create and save the Stock instance
+#                     mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+#                     lot = Lot.objects.get(LotID=LotID)
+#                     product = Product.objects.get(ProductID=ProductID)
+#                     option = Options.objects.get(OptionID=OptionID)
+#                     warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+
+#                     stock = Stock(
+#                         Mazdoor=mazdoor,
+#                         Lot=lot,
+#                         Product=product,
+#                         Options=option,
+#                         LabourAmount=LabourAmount,
+#                         Quantity=Quantity,
+#                         Warehouse=warehouse
+#                     )
+#                     print(request.POST)
+#                     print(f'MazdoorID: {MazdoorID}')
+#                     print(f'LotID: {LotID}')
+#                     stock.save()
+                    
+
+#         messages.success(request, 'Stock has been added successfully')
+#         return redirect('view_stock')
+
+#     context = {
+#         'mazdoors': mazdoors,
+#         'lots': lots,
+#         'products': products,
+#         'options': options,
+#         'warehouses': warehouses
+#     }
+#     return render(request, 'Inventory/Stock/add_stock.html', context)
+
+
+# logger = logging.getLogger(__name__)
+
+# def Add_Stock(request):
+#     mazdoors = Mazdoor.objects.all()
+#     lots = Lot.objects.all()
+#     products = Product.objects.all()
+#     options = Options.objects.all()
+#     warehouses = Warehouse.objects.all()
+
+#     if request.method == "POST":
+#         try:
+#             # Handle the submitted form data
+#             for key, value in request.POST.items():
+#                 if key.startswith('MazdoorID'):
+#                     # Extract the row number from the key
+#                     split_key = key.split('_')
+
+#                     # Check if the split produced at least two elements
+#                     if len(split_key) >= 2:
+#                         row_number = split_key[1]
+
+#                         # Use the row number to construct the field names
+#                         MazdoorID = request.POST.get(f'MazdoorID_{row_number}')
+#                         LotID = request.POST.get(f'LotID_{row_number}')
+#                         ProductID = request.POST.get(f'ProductID_{row_number}')
+#                         OptionID = request.POST.get(f'OptionID_{row_number}')
+#                         LabourAmount = request.POST.get(f'LabourAmount_{row_number}')
+#                         Quantity = request.POST.get(f'Quantity_{row_number}')
+#                         WarehouseID = request.POST.get(f'WarehouseID_{row_number}')
+
+#                         # Create and save the Stock instance
+#                         mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+#                         lot = Lot.objects.get(LotID=LotID)
+#                         product = Product.objects.get(ProductID=ProductID)
+#                         option = Options.objects.get(OptionID=OptionID)
+#                         warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+
+#                         stock = Stock(
+#                             Mazdoor=mazdoor,
+#                             Lot=lot,
+#                             Product=product,
+#                             Options=option,
+#                             LabourAmount=LabourAmount,
+#                             Quantity=Quantity,
+#                             Warehouse=warehouse
+#                         )
+#                         stock.save()
+
+#             messages.success(request, 'Stock has been added successfully')
+#             return redirect('view_stock')
+
+#         except Exception as e:
+#             # Log the error for debugging
+#             logger.error(f"An error occurred: {str(e)}")
+#             messages.error(request, f'Error occurred while adding stock: {str(e)}. Please try again.')
+
+#     context = {
+#         'mazdoors': mazdoors,
+#         'lots': lots,
+#         'products': products,
+#         'options': options,
+#         'warehouses': warehouses
+#     }
+#     return render(request, 'Inventory/Stock/add_stock.html', context)
+
+
+# def Add_Stock(request):
+#     mazdoors = Mazdoor.objects.all()
+#     lots = Lot.objects.all()
+#     products = Product.objects.all()
+#     options = Options.objects.all()
+#     warehouses = Warehouse.objects.all()
+
+#     if request.method == "POST":
+#         data = request.POST.copy()
+#         records = []
+
+#         for i in range(int(data.get('total_records', 1))):
+#             record = {
+#                 'MazdoorID': data.get(f'MazdoorID_{i}'),
+#                 'LotID': data.get(f'LotID_{i}'),
+#                 'ProductID': data.get(f'ProductID_{i}'),
+#                 'OptionID': data.get(f'OptionID_{i}'),
+#                 'LabourAmount': data.get(f'LabourAmount_{i}'),
+#                 'Quantity': data.get(f'Quantity_{i}'),
+#                 'WarehouseID': data.get(f'WarehouseID_{i}'),
+#             }
+#             records.append(record)
+
+#         for record in records:
+#             mazdoor = Mazdoor.objects.get(MazdoorID=record['MazdoorID'])
+#             lot = Lot.objects.get(LotID=record['LotID'])
+#             product = Product.objects.get(ProductID=record['ProductID'])
+#             option = Options.objects.get(OptionID=record['OptionID'])
+#             warehouse = Warehouse.objects.get(WarehouseID=record['WarehouseID'])
+
+#             stock = Stock(
+#                 Mazdoor=mazdoor,
+#                 Lot=lot,
+#                 Product=product,
+#                 Options=option,
+#                 LabourAmount=record['LabourAmount'],
+#                 Quantity=record['Quantity'],
+#                 Warehouse=warehouse
+#             )
+#             stock.save()
+
+#         messages.success(request, 'Stock has been added successfully')
+#         return redirect('view_stock')
+
+#     context = {
+#         'mazdoors': mazdoors,
+#         'lots': lots,
+#         'products': products,
+#         'options': options,
+#         'warehouses': warehouses
+#     }
+#     return render(request, 'Inventory/Stock/add_stock.html', context)
+
+
+
+def View_Stock(request):
+    stocks = Stock.objects.all()
+    context = {
+        'stocks': stocks
+    }
+    return render(request, 'Inventory/Stock/view_stock.html', context)
+
+def Edit_Stock(request, id):
+    stock = Stock.objects.get(StockID=id)
+    mazdoors = Mazdoor.objects.all()
+    lots = Lot.objects.all()
+    products = Product.objects.all()
+    options = Options.objects.all()
+    warehouses = Warehouse.objects.all()
+
+    context = {
+        'stock': stock,
+        'mazdoors': mazdoors,
+        'lots': lots,
+        'products': products,
+        'options': options,
+        'warehouses': warehouses
+    }
+    return render(request, 'Inventory/Stock/edit_stock.html', context)
+
+def Update_Stock(request):
+    if request.method == "POST":
+        StockID = request.POST.get('StockID')
+        MazdoorID = request.POST.get('MazdoorID')
+        LotID = request.POST.get('LotID')
+        ProductID = request.POST.get('ProductID')
+        OptionID = request.POST.get('OptionID')
+        LabourAmount = request.POST.get('LabourAmount')
+        Quantity = request.POST.get('Quantity')
+        WarehouseID = request.POST.get('WarehouseID')
+
+        mazdoor = Mazdoor.objects.get(MazdoorID=MazdoorID)
+        lot = Lot.objects.get(LotID=LotID)
+        product = Product.objects.get(ProductID=ProductID)
+        option = Options.objects.get(OptionID=OptionID)
+        warehouse = Warehouse.objects.get(WarehouseID=WarehouseID)
+
+        stock = Stock.objects.get(StockID=StockID)
+        stock.Mazdoor = mazdoor
+        stock.Lot = lot
+        stock.Product = product
+        stock.Options = option
+        stock.LabourAmount = LabourAmount
+        stock.Quantity = Quantity
+        stock.Warehouse = warehouse
+
+        stock.save()
+        messages.success(request, 'Stock has been updated successfully')
+        return redirect('view_stock')
+
+    return render(request, 'Inventory/Stock/view_stock.html')
+
+def Delete_Stock(request, id):
+    stock = Stock.objects.get(StockID=id)
+    stock.delete()
+    messages.success(request, 'Stock has been deleted successfully')
+    return redirect('view_stock')
+
+
+
+# Accounts 
+
+
+def Add_Account(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        account = Account(Name=Name)
+        account.save()
+        messages.success(request, 'Account has been added successfully')
+        return redirect('view_account')
+    return render(request, 'Accounting/Accounts/add_account.html')  # Update the template path
+
+def View_Account(request):
+    accounts = Account.objects.all()
+    context = {
+        'accounts': accounts
+    }
+    return render(request, 'Accounting/Accounts/view_account.html', context)  # Update the template path
+
+def Edit_Account(request, id):
+    account = Account.objects.get(AccountID=id)
+    context = {
+        'account': account
+    }
+    return render(request, 'Accounting/Accounts/edit_account.html', context)  # Update the template path
+
+def Update_Account(request):
+    if request.method == "POST":
+        AccountID = request.POST.get('AccountID')
+        Name = request.POST.get('Name')
+        account = Account.objects.get(AccountID=AccountID)
+        account.Name = Name
+        account.save()
+        messages.success(request, 'Account has been updated successfully')
+        return redirect('view_account')
+    return render(request, 'Accounting/Accounts/view_account.html')  # Update the template path
+
+def Delete_Account(request, id):
+    account = Account.objects.get(AccountID=id)
+    account.delete()
+    messages.success(request, 'Account has been deleted')
+    return redirect('view_account')
+
+
+# Transaction views
+def Add_Transaction(request):
+    if request.method == "POST":
+        Name = request.POST.get('Name')
+        date = request.POST.get('date')
+        # date = datetime.strptime(request.POST['date'], '%d:%m:%Y')
+        description = request.POST.get('description')
+        transaction = Transaction(date=date, description=description, Name=Name)
+        transaction.save()
+        messages.success(request, 'Transaction has been added successfully')
+        return redirect('view_transaction')
+    return render(request, 'Accounting/Transaction/add_transaction.html')  # Update the template path
+
+def View_Transaction(request):
+    transactions = Transaction.objects.all()
+    context = {
+        'transactions': transactions
+    }
+    return render(request, 'Accounting/Transaction/view_transaction.html', context)  # Update the template path
+
+def Edit_Transaction(request, id):
+    transaction = Transaction.objects.get(TransactionID=id)
+    context = {
+        'transaction': transaction
+    }
+    return render(request, 'Accounting/Transaction/edit_transaction.html', context)  # Update the template path
+
+def Update_Transaction(request):
+    if request.method == "POST":
+        TransactionID = request.POST.get('TransactionID')
+        Name = request.POST.get('Name')
+        # date = request.POST.get('date')
+        date_str = request.POST.get('date')
+        # Convert date string to datetime object
+        date = datetime.strptime(date_str, '%Y-%m-%d')
+        description = request.POST.get('description')
+        transaction = Transaction.objects.get(TransactionID=TransactionID)
+        transaction.Name = Name
+        transaction.date = date
+        transaction.description = description
+        transaction.save()
+        messages.success(request, 'Transaction has been updated successfully')
+        return redirect('view_transaction')
+    return render(request, 'Accounting/Transaction/view_transaction.html')  # Update the template path
+
+def Delete_Transaction(request, id):
+    transaction = Transaction.objects.get(TransactionID=id)
+    transaction.delete()
+    messages.success(request, 'Transaction has been deleted')
+    return redirect('view_transaction')
+
+
+# Ledger Entry views
+def Add_LedgerEntry(request):
+    if request.method == "POST":
+        account_id = request.POST.get('account')
+        transaction_id = request.POST.get('transaction')
+        amount = request.POST.get('amount')
+        DebitAmount = request.POST.get('DebitAmount')
+        CreditAmount = request.POST.get('CreditAmount')
+        account = Account.objects.get(AccountID=account_id)
+        transaction = Transaction.objects.get(TransactionID=transaction_id)
+        ledger_entry = LedgerEntry(account=account, transaction=transaction, amount=amount, DebitAmount=DebitAmount, CreditAmount=CreditAmount)
+        ledger_entry.save()
+        messages.success(request, 'Ledger Entry has been added successfully')
+        return redirect('view_ledgerentry')
+    
+    accounts = Account.objects.all()
+    transactions = Transaction.objects.all()
+    context = {
+        'accounts': accounts,
+        'transactions': transactions
+    }
+    return render(request, 'Accounting/Ledger/add_ledgerentry.html', context)  # Update the template path
+
+def View_LedgerEntry(request):
+    ledger_entries = LedgerEntry.objects.all()
+    context = {
+        'ledger_entries': ledger_entries
+    }
+    return render(request, 'Accounting/Ledger/view_ledgerentry.html', context)  # Update the template path
+
+def Edit_LedgerEntry(request, id):
+    ledger_entry = LedgerEntry.objects.get(LedgerEntryID=id)
+    accounts = Account.objects.all()
+    transactions = Transaction.objects.all()
+    context = {
+        'ledger_entry': ledger_entry,
+        'accounts': accounts,
+        'transactions': transactions
+    }
+    return render(request, 'Accounting/Ledger/edit_ledgerentry.html', context)  # Update the template path
+
+def Update_LedgerEntry(request):
+    if request.method == "POST":
+        LedgerEntryID = request.POST.get('LedgerEntryID')
+        account_id = request.POST.get('account')
+        transaction_id = request.POST.get('transaction')
+        amount = request.POST.get('amount')
+        DebitAmount = request.POST.get('DebitAmount')
+        CreditAmount = request.POST.get('CreditAmount')
+        account = Account.objects.get(AccountID=account_id)
+        transaction = Transaction.objects.get(TransactionID=transaction_id)
+        ledger_entry = LedgerEntry.objects.get(LedgerEntryID=LedgerEntryID)
+        ledger_entry.account = account
+        ledger_entry.transaction = transaction
+        ledger_entry.amount = amount
+        ledger_entry.DebitAmount = DebitAmount
+        ledger_entry.CreditAmount = CreditAmount
+        ledger_entry.save()
+        messages.success(request, 'Ledger Entry has been updated successfully')
+        return redirect('view_ledgerentry')
+    
+    return render(request, 'Accounting/Ledger/view_ledgerentry.html')  # Update the template path
+
+def Delete_LedgerEntry(request, id):
+    ledger_entry = LedgerEntry.objects.get(LedgerEntryID=id)
+    ledger_entry.delete()
+    messages.success(request, 'Ledger Entry has been deleted')
+    return redirect('view_ledgerentry')

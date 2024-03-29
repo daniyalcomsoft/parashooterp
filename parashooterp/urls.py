@@ -27,7 +27,7 @@ urlpatterns = [
     path('', views.LOGIN, name='login'),
     path('doLogin', views.doLogin, name='doLogin'),
     path('doLogout', views.doLogout, name='logout'),
-    path('hod/Home', Hod_views.HOME, name='hod_home'),
+    path('hod/Home', views.HOME, name='hod_home'),
     path('profile', views.PROFILE, name='profile'),
     path('profile/update', views.PROFILE_UPDATE, name='profile_update'),
 
@@ -226,11 +226,40 @@ urlpatterns = [
     path('update/productcategory/', views.Update_ProductCategory, name='update_productcategory'),
     path('delete/productcategory/<str:id>', views.Delete_ProductCategory, name='delete_productcategory'),
 
+
+
     path('add/options/', views.Add_Options, name='add_options'),
     path('view/options/', views.View_Options, name='view_options'),
     path('edit/options/<str:id>', views.Eidt_Options, name='edit_options'),
     path('update/options/', views.Update_Options, name='update_options'),
     path('delete/options/<str:id>', views.Delete_Options, name='delete_options'),
+
+
+    path('add/categoryone/', views.Add_CategoryOne, name='add_categoryone'),
+    path('view/categoryone/', views.View_CategoryOne, name='view_categoryone'),
+    path('edit/categoryone/<str:id>', views.Edit_CategoryOne, name='edit_categoryone'),
+    path('update/categoryone/', views.Update_CategoryOne, name='update_categoryone'),
+    path('delete/categoryone/<str:id>', views.Delete_CategoryOne, name='delete_categoryone'),
+
+    path('add/categorytwo/', views.Add_CategoryTwo, name='add_categorytwo'),
+    path('view/categorytwo/', views.View_CategoryTwo, name='view_categorytwo'),
+    path('edit/categorytwo/<str:id>', views.Edit_CategoryTwo, name='edit_categorytwo'),
+    path('update/categorytwo/', views.Update_CategoryTwo, name='update_categorytwo'),
+    path('delete/categorytwo/<str:id>', views.Delete_CategoryTwo, name='delete_categorytwo'),
+
+
+    path('add/categorythree/', views.Add_CategoryThree, name='add_categorythree'),
+    path('view/categorythree/', views.View_CategoryThree, name='view_categorythree'),
+    path('edit/categorythree/<str:id>', views.Edit_CategoryThree, name='edit_categorythree'),
+    path('update/categorythree/', views.Update_CategoryThree, name='update_categorythree'),
+    path('delete/categorythree/<str:id>', views.Delete_CategoryThree, name='delete_categorythree'),
+
+    path('add/categoryfour/', views.Add_CategoryFour, name='add_categoryfour'),
+    path('view/categoryfour/', views.View_CategoryFour, name='view_categoryfour'),
+    path('edit/categoryfour/<str:id>', views.Edit_CategoryFour, name='edit_categoryfour'),
+    path('update/categoryfour/', views.Update_CategoryFour, name='update_categoryfour'),
+    path('delete/categoryfour/<str:id>', views.Delete_CategoryFour, name='delete_categoryfour'),
+
 
     path('add/province', views.Add_Province, name='add_province'),
     path('view/province', views.View_Province, name='view_province'),
@@ -244,9 +273,60 @@ urlpatterns = [
     path('update/area', views.Update_Area, name='update_area'),
     path('delete/area/<str:id>', views.Delete_Area, name='delete_area'),
 
-    
+
+    path('add/product/', views.Add_Product, name='add_product'),
+    path('view/product', views.View_Product, name='view_product'),
+    path('edit/product/<str:id>', views.Edit_Product, name='edit_product'),
+    path('update/product', views.Update_Product, name='update_product'),
+    path('delete/product/<str:id>', views.Delete_Product, name='delete_product'),
+
 
     
+
+    path('add/mazdoor/', views.Add_Mazdoor, name='add_mazdoor'),
+    path('view/mazdoor', views.View_Mazdoor, name='view_mazdoor'),
+    path('edit/mazdoor/<str:id>', views.Edit_Mazdoor, name='edit_mazdoor'),
+    path('update/mazdoor', views.Update_Mazdoor, name='update_mazdoor'),
+    path('delete/mazdoor/<str:id>', views.Delete_Mazdoor, name='delete_mazdoor'),
+
+
+    path('add/lot/', views.Add_Lot, name='add_lot'),
+    path('view/lot', views.View_Lot, name='view_lot'),
+    path('edit/lot/<str:id>', views.Edit_Lot, name='edit_lot'),
+    path('update/lot', views.Update_Lot, name='update_lot'),
+    path('delete/lot/<str:id>', views.Delete_Lot, name='delete_lot'),
+
+    path('add/warehouse/', views.Add_Warehouse, name='add_warehouse'),
+    path('view/warehouse', views.View_Warehouse, name='view_warehouse'),
+    path('edit/warehouse/<str:id>', views.Edit_Warehouse, name='edit_warehouse'),
+    path('update/warehouse', views.Update_Warehouse, name='update_warehouse'),
+    path('delete/warehouse/<str:id>', views.Delete_Warehouse, name='delete_warehouse'),
+
+
+    path('add/stock/', views.Add_Stock, name='add_stock'),
+    path('view/stock', views.View_Stock, name='view_stock'),
+    path('edit/stock/<str:id>', views.Edit_Stock, name='edit_stock'),
+    path('update/stock', views.Update_Stock, name='update_stock'),
+    path('delete/stock/<str:id>', views.Delete_Stock, name='delete_stock'),
+
+
+    path('add/account/', views.Add_Account, name='add_account'),
+    path('view/account', views.View_Account, name='view_account'),
+    path('edit/account/<str:id>', views.Edit_Account, name='edit_account'),
+    path('update/account', views.Update_Account, name='update_account'),
+    path('delete/account/<str:id>', views.Delete_Account, name='delete_account'),
+
+    path('add/transaction/', views.Add_Transaction, name='add_transaction'),
+    path('view/transaction', views.View_Transaction, name='view_transaction'),
+    path('edit/transaction/<str:id>', views.Edit_Transaction, name='edit_transaction'),
+    path('update/transaction', views.Update_Transaction, name='update_transaction'),
+    path('delete/transaction/<str:id>', views.Delete_Transaction, name='delete_transaction'),
+
+    path('add/ledgerentry/', views.Add_LedgerEntry, name='add_ledgerentry'),
+    path('view/ledgerentry', views.View_LedgerEntry, name='view_ledgerentry'),
+    path('edit/ledgerentry/<str:id>', views.Edit_LedgerEntry, name='edit_ledgerentry'),
+    path('update/ledgerentry', views.Update_LedgerEntry, name='update_ledgerentry'),
+    path('delete/ledgerentry/<str:id>', views.Delete_LedgerEntry, name='delete_ledgerentry'),    
 
 
 

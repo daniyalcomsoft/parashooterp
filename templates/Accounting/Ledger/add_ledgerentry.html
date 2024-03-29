@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_ledgerentry' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Add Ledger Entry</span></h5>
+                        </div>
+                        {% include 'includes/messages.html' %}
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Account</label>
+                                <select class="form-control" name="account" required>
+                                    <option>Select Account</option>
+                                    {% for account in accounts %}
+                                    <option value="{{ account.AccountID }}">{{ account.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Transaction</label>
+                                <select class="form-control" name="transaction" required>
+                                    <option>Select Transaction</option>
+                                    {% for transaction in transactions %}
+                                    <option value="{{ transaction.TransactionID }}">{{ transaction.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" class="form-control" name="amount" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Debit Amount</label>
+                                <input type="number" class="form-control" name="DebitAmount">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Credit Amount</label>
+                                <input type="number" class="form-control" name="CreditAmount">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Ledger Entry</button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

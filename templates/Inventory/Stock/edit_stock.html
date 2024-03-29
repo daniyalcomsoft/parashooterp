@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'update_stock' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Edit Stock</span></h5>
+                        </div>
+                       {% include 'includes/messages.html' %}
+                       <!-- <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="">Main Company</label>
+                            <select class="form-control" name="client_id" required>
+                                <option>Select Company</option>
+                                {% for com in company %}
+                                <option value="{{com.ClientID}}"{% if com.ClientID == endclient.client.ClientID %} selected {% endif %}>{{com.CompanyName}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       </div> -->
+
+                       <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="StockID" value="{{stock.StockID}}" required hidden>
+                        </div>
+                       </div>
+                       
+                       <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Mazdoor</label>
+                            <select class="form-control" name="MazdoorID" required>
+                                <option>Select Mazdoor</option>
+                                {% for maz in mazdoors %}
+                                <option value="{{ maz.MazdoorID }}" {% if maz.MazdoorID == stock.Mazdoor.MazdoorID %}selected{% endif %}>{{ maz.Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Lot Dropdown -->
+                    <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Lot</label>
+                            <select class="form-control" name="LotID" required>
+                                <option>Select Lot</option>
+                                {% for lot in lots %}
+                                <option value="{{ lot.LotID }}" {% if lot.LotID == stock.Lot.LotID %}selected{% endif %}>{{ lot.Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Dropdown -->
+                    <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Product</label>
+                            <select class="form-control" name="ProductID" required>
+                                <option>Select Product</option>
+                                {% for pd in products %}
+                                <option value="{{ pd.ProductID }}" {% if pd.ProductID == stock.Product.ProductID %}selected{% endif %}>{{ pd.ProductName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Options Dropdown -->
+                    <div class="col-2 col-sm-2">
+                        <div class="form-group">
+                            <label for="">Options</label>
+                            <select class="form-control" name="OptionID" required>
+                                <option>Select Options</option>
+                                {% for op in options %}
+                                <option value="{{ op.OptionID }}" {% if op.OptionID == stock.Options.OptionID %}selected{% endif %}>{{ op.OptionName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                        <div class="col-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Labour Amount</label>
+                                <input type="text" class="form-control" name="LabourAmount" value="{{stock.LabourAmount}}">
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2">
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="text" class="form-control" name="Quantity" value="{{stock.Quantity}}">
+                            </div>
+                        </div>
+
+                        <div class="col-2 col-sm-2">
+                            <div class="form-group">
+                                <label for="">Warehouse</label>
+                                <select class="form-control" name="WarehouseID" required>
+                                    <option>Select Warehouse</option>
+                                    {% for wh in warehouses %}
+                                    <option value="{{ wh.WarehouseID }}" {% if wh.WarehouseID == stock.Warehouse.WarehouseID %}selected{% endif %}>{{ wh.Name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update Stock</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

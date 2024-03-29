@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-&-6%oq9o-#4p*0hltt#dp4-y_l35n+2_8@pel1xpgc8itv_5q5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['azamplastic.com', 'www.azamplastic.com']
 ALLOWED_HOSTS = []
 
 # DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
@@ -86,23 +87,23 @@ WSGI_APPLICATION = 'parashooterp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dajt9lbb5u842j',
-        'USER': 'tssurvsgwdoejq',
-        'PASSWORD': '45a8f94733e86583240f1f972dd0fc5504fe16ed754079531cfdc867aba77bfe',
-        'HOST': 'ec2-34-238-201-192.compute-1.amazonaws.com',
-        'PORT':'5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dajt9lbb5u842j',
+#         'USER': 'tssurvsgwdoejq',
+#         'PASSWORD': '45a8f94733e86583240f1f972dd0fc5504fe16ed754079531cfdc867aba77bfe',
+#         'HOST': 'ec2-34-238-201-192.compute-1.amazonaws.com',
+#         'PORT':'5432'
+#     }
+# }
 
 
 # Password validation
